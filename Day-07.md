@@ -67,7 +67,7 @@ To run the script
 ```./aws_resource_tracker.sh | more```
 Here more is used to read the file in better way
 
-**set -x in the script -- Gives us all the details like it is show the command which is printing, echo statements**
+**set -x IS DEBUG in the script -- Gives us all the details like it is show the command which is printing, echo statements**
 
 Here we are getting output in json and it is displaying everything, So if we need specfic thing then use 
 ```aws ec2 describe-instances | jq '.Reservations[].Instances[].InstanceId'``` Is is used to show the specific tag info
