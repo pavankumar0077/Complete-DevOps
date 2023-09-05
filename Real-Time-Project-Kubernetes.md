@@ -14,3 +14,6 @@ kubectl command on web app and it will try to fetch the least image it will pull
 building the image, from image it will build container. That conatiner should be accessable using the IP and port
 which we are going to enable by writing service.yaml file in the kubernetes cluster
 ```
+
+
+
