@@ -21,4 +21,42 @@
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/f47de4d6-149f-40a3-b888-c9ff90350c5d)
 
 
+To Change the hostname
+--
+``` hostnamectl set-hostname server1.example.com ```
 
+All the code which jenkins is pull will be available on ``` /var/lib/jenkins/workspace ``` dir
+
+To extra any tar file ``` tar -xvzf file-name.tar ```
+
+To rename mv apache-8.9.3-maven to maven use ``` mv apache-maven-3.8.8 maven ```
+
+To find a file in linux ```  find / -name jvm ```
+Ex: ``` find / -name java-11* ```
+
+use ``` init 6 ``` to restart the instance
+
+To start the docker at runtime use ```chk config```
+
+```  docker run -d --name tomcat-containier -p 8081:8080 tomcat ``` Here 8081 is the outside or external or hostmachine port and 8080 is the container port of tomcat
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/e248a775-fc51-405f-bb92-03df1b03a295)
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/1a90fce5-fb86-4dfa-a8ae-ad7dda7930b4)
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/a9dc0430-a71b-4f5f-8788-83f56880ee34)
+
+1) We are using centos os as base image
+2) and we need jave to run tomcat
+3) and to create directory use mkdir
+4) we want to go to tomcat dir use WORKDIR
+5) Here to donwload files we use wget or add, if we use RUN then we must mention wget, and if we use ADD then no need to mention anything just ADD url-link
+
+
+
+```
+FROM tomcat:latest
+RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps
+```
+To run tomat without issue (403 - after updating the version of tomcat).The above dockerfile is customized and it works without error
+ 
