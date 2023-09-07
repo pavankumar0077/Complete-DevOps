@@ -40,6 +40,12 @@ To start the docker at runtime use ```chk config```
 
 ```  docker run -d --name tomcat-containier -p 8081:8080 tomcat ``` Here 8081 is the outside or external or hostmachine port and 8080 is the container port of tomcat
 
+``` su dockeradmin ``` For switch usering in linux 
+``` chown -R dockeradmin:dockeradmin docker ``` To Change owenership, Here dockeradmin is the username and docker is dir name
+``` docker container prune ``` To delete all the stopped containers
+``` docker image prune -a ``` To delete all images
+```  git commit -am "updates-index-page.jsp" ``` Use it everytime we don't need to (add . - git add .) instead use this command add and commit at same time 
+
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/e248a775-fc51-405f-bb92-03df1b03a295)
 
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/1a90fce5-fb86-4dfa-a8ae-ad7dda7930b4)
