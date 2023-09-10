@@ -74,3 +74,86 @@ Details and get some request and response to use in application dev we use API's
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/d9472c48-069c-4061-8a31-320b7f6ee138)
 
 # Infra as code using AWS CFT's AZURE resource manager., API as code terraform
+
+
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/eec41fea-6e53-4ed0-b561-6426734a177b)
+
+1) **Manage any Infra** --  If we need any new CLOUD Provider, The hashicrop people will write the code to interact to the API. We just need to give the details of theat particular Cloud provider in terraform script.
+2) **Track your infrastructure** -- In Terraform we don't need to login to the cloud and see what are created. We can keep track of infra using terraform state file.
+3) **Automate changes** -- Like if you want to update and like increase the instances then we don't need to login in AWS and do the stuff, Instead use terrafrom script and update it and we can even **collaborate** with others using github don't upload state.tf exact that we can upload other files so other can also update it based on requirement.
+4) **Standardize configurations** -- There is standard we are maintaining with tf files, like in differnet clouds we use the scripts in different so here we are following the standardized way.
+
+Life cycle of Terraform
+--
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/42a08c72-fac8-42fd-b5ed-e6944bbe12d1)
+
+1) Write the configuarion files -- If you don't know how to write then search in google like ```hashicrop terrafrom aws``` and you will get the docs by using this link ``` https://registry.terraform.io/providers/hashicorp/aws/latest/docs ```
+2) Once we write the terraform configuration files, terraform takes the request create an api request and send to target cloud provider.
+3) Let's say you wrote something wrong, then terrafrom supports DRY-RUN feature
+4) DRY-RUN is a way using which we can acutally see what are the things that going to be happen when we execute
+5) Terraform plan -- will check the mistakes and show up
+6) Terrform apply -- to apply the config files and create the infra.
+
+Install Terraform
+--
+``` https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli ```
+or Google it
+
+NOTE : Always install the latest version to get support of all clouds providers.
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/b81acc54-3e5e-4fa2-8992-51e789a789c6)
+
+1) Terraform init -- will intialize the terraform
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/94587575-6519-4290-841a-20b4b7d5c816)
+
+Basic main.tf file
+--
+```
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.16"
+    }
+  }
+
+  required_version = ">= 1.2.0"
+}
+
+provider "aws" {
+  region  = "us-west-2"
+}
+
+resource "aws_instance" "app_server" {
+  ami           = "ami-830c94e3"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "Terraform_Demo"
+  }
+}
+```
+1) terrform block
+2) require_providers -- Here it can single providers or multi providers like AWS, AZURE the version we can get from docs
+``` https://registry.terraform.io/providers/hashicorp/aws/latest/docs ```
+3) if we add AZURE in feature in the tf file then we need to re-initilize the terraform using ``` terraform init ```
+4) required_version == used to support terraform
+5) privider_region -- If we don't mention this then also it will work, BUt but default terraform will take the default region that is us-east, ANd this block not mandatory
+6) till this line all the abvoe code will be same and static
+7) resources -- What type of resources you want to create like ec2, s3 and etc, we and create one more at a time.Org's always use input,output files are variable like name, version and etc to update
+
+
+
+
+
+
+
+
+
+
+
