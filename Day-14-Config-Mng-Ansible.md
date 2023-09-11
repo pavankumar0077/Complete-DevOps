@@ -1,4 +1,6 @@
-![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/12df894b-683f-4de1-b080-9b68d22d1a13)# CONFIGURATION MANAGEMENT
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/12df894b-683f-4de1-b080-9b68d22d1a13)
+
+# CONFIGURATION MANAGEMENT
 
 How configuration is managment on servers(Infrastrucuture) 
 1) Upgrade
