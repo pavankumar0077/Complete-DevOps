@@ -42,6 +42,22 @@ Piepline and Jenkins will automatically run all the stage when new code is pused
 NOTE: With this we will improve the effeiency of the application.
 
 STEP: 2
-1) Usually Org's Divides their working ENV's to multiple like DEV, STAGE OR UAT, PROD 
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/5a43b0d2-d041-41eb-a7a3-bcc276e11b2b)
+1) This Jenkins prompt our application to Dev, Stage and Prod
+2) Org's divide the env's as DEV,STAGE AND PROD - End user
+3) Usually Org's Divides their working ENV's to multiple like DEV, STAGE OR UAT, PROD 
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/7cd356fe-f409-494d-8a89-c3a35253cbd1)
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/dcd8d979-349b-4d25-a9ab-ab27b8e89abe)
+
+**GITHUB Actions** :  **Github Actions are another way of doing CI CD just like jenkins, Whenever a code change is made it is spin up a kubernetes pod and it will create a docker container for us and everything will get executed in the docker container if you are not using it the server or worker which is used to run this docker containers will be used by some other projects like a shared resources.**
+
+### NOTE :  Most of the open source projects us GITHUB ACTIONS
+
+```
+Jenkins is event driven whenever we get a pull request we can do using webhooks 
+GITHUB actions are by default evernt driven and continouse intergration and continous delivery solution, we can also interate the pipelines from one project to another project their are many advantages that github actions will provide.
+```
 
 
