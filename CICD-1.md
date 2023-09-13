@@ -40,15 +40,55 @@ Create pipeline
 15) Here we need to check for pipeline syntax ``` sonarwithcredentails ``` and give only sonar (server-name) which we configured in tools
 16) sh (''') used to multiple line commands and ("") for single command
 17) project name and projectkey we can anything related to project
+18) Add this plugin to install atleast version of java **Eclipse Temurin installer** and add java11 and java17 to not to get any errors.
+19) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/c8613634-79ea-44ff-abdf-aefe15395022)
+20) ``` tools{
+        jdk 'jdk11'
+    }
+    ```
+21) If we are using different then we have to mention like this in the pipeline in the up, TOOL TYPE AND TOOL NAME like jdk11 or jdk17 which we have mentioned in the jdk installation in tools
+22) Stage 5: Install node -- dependencies --> We have to mention in the tools section in the starting of jenkins file as we did for java
+23) Stage 6 and 7 adding backedn and frontend --> In jenkins we con't move like this using CD so we use in this format
+24) ``` stage('frontend') {
+            steps {
+                dir('/root/.jenkins/workspace/Bank/app/frontend') {
+                    sh "npm install"
+                }
+                
+            }
+    ```
+25) In the above step dir should to jenkins dir in our case the location will be ``` /var/lib/jenkins/workspace/Bank/app/backend ```
+26) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```
 pipeline {
     agent any
     
-    environment{
-        SCANNER_HOME= tool 'sonar-scanner'
+    tools{
+        jdk 'jdk17'
+        nodejs 'node16'
+        
     }
-
+    
+    environment{
+       SCANNER_HOME = tool 'sonar-scanner'
+       JENKINS_HOME = '/var/lib/jenkins' // Set the HOME directory
+    }
+    
     stages {
         stage('Git Checkout') {
             steps {
@@ -56,9 +96,9 @@ pipeline {
             }
         }
         
-        stage('OWASP SCAN') {
+        stage('OWASP FS SCAN') {
             steps {
-                dependencyCheck additionalArguments: '--scan ./', odcInstallation: 'DC'
+                dependencyCheck additionalArguments: '--scan ./app/backend --disableYarnAudit --disableNodeAudit', odcInstallation: 'DC'
                     dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
@@ -71,10 +111,39 @@ pipeline {
         
         stage('SONARQUBE ANALYSIS') {
             steps {
-               withSonarQubeEnv('sonar') {
-                   sh " $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Bank -Dsonar.projectKey=Bank "
-                   
-               }
+                withSonarQubeEnv('sonar') {
+                    sh " $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Bank -Dsonar.projectKey=Bank "
+                }
+            }
+        }
+        
+        
+         stage('Install Dependencies') {
+            steps {
+                sh "npm install"
+            }
+        }
+        
+        stage('Backend') {
+            steps {
+                dir('var/lib/jenkins/workspace/Bank/app/backend') {
+                    sh "npm install"
+                }
+            }
+        }
+        
+        stage('frontend') {
+            steps {
+                dir('var/lib/jenkins/workspace/Bank/app/frontend') {
+                    sh "npm install"
+                }
+            }
+        }
+        
+        stage('Deploy to Conatiner') {
+            steps {
+                sh "npm run compose:up -d"
+                args '-v $HOME:/home/jenkins'
             }
         }
     }
