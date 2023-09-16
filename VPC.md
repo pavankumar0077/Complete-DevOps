@@ -35,4 +35,20 @@ that you will reach me.
 public subnet in the vpc (commmon subnet across vpc) --> Load Balancer (It send the request to the private subnet and the applicaiton) --> For load balancer subnet is present
 but path is given in route table --> Once the request reached in the subnet still we have SECURITY GROUP --> Once the security group allows the ip request will be sent
 to application.
-13) 
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/26cb7ea4-7ecf-4d64-bc8f-af89ab10bc71)
+
+1) Someone in the internete tries to access one application with ip 172.17.0.4/24 (In general he will not use private ip address he uses the load balancer ip)
+2) To reach So we know Devops engineer created a VPC. In VPC we have internet gateway. The entire VPC has a ip address range. Devops engineer created subnets based on the projects. For each project we have some ip range
+3) Internet --> VPC internet gateay --> Public subnet (Which can be accessed to public outside the vpc) --> Load balancer (Elastic load balancer) (Target group - access instance to target group)(private subnet - and at the same time the subnet should have the route table) --> To send request to private subnet there should be a proper route --> route will be decided by route table --> security group to accept or reject the request
+4) Internet gateway --> Public subnet --> Load balancer --> Route tables (routers) --> security groups
+5) NACL -- automation to security groups
+6) If the application wants to access the internet to download some pkg's. So we don't want to expose private ip to internet (it is bad practise) for this we have do
+masking of ip address --> It is called NAT GATEWAY
+7) NAT gateway --> will change the ip address like public ip of the subnet or router ip to access the internet from the private subnet application instance
+8) If it is using load balancer to access then it is called SNAT, if it is using router we call it as NAT gateway
+9) NAT gateway will be created in public subnet 
+10) VPC flow logs will log the every traffic (some features are paid)
+
+
+
