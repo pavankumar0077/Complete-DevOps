@@ -55,6 +55,29 @@ NACL (Network Access Control List)
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/5c0e62fb-1a31-4c37-aef2-a76b8c3bfad3)
 1) ... lines represents virtual private cloud
 2) We have create virtual private cloud and provide IP ADDRESS RANGE, AWS bydefault will create Internet gateway, NACL, Route table
-3) additonal we will create EC2 instance and attach a security group for this EC2 instance 
+3) additonal we will create EC2 instance and attach a security group for this EC2 instance
+
+Create VPC
+--
+1) VPC --> Select VPC and More (To get AWS secuirty as well like igw and others)
+2) Select ip range , 16,24,32 byefautl it is 16
+3) Select availability zones and endpoint as required
+
+Create Instance
+--
+1) Instance name --> key
+2) Edit network settings --> Select vpc that we have created
+3) subnet should be private that is industry pratice
+4) assign ip -- enable
+5) firewall -- use create group or exising group if you have alredy have it
+
+NOTE: 
+1) IN VPC --> Network ACLs --> Inbound rules --> priority matters
+2) Now from NACL all the traffic is allowed. So internet gateway forwards all the traffic to the route table  to load balancer if we have load balancer
+3) Now router table will forward the traffic to the EC2 instance
+4) NACL is allowed now, But security group is blocking now.
+5) We can block specific ip address with 16,32,14 as well
+
+
 
   
