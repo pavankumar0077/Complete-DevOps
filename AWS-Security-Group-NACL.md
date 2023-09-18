@@ -33,5 +33,28 @@ Amazon webiste --> Amazonpay is outbound.
 9) AWS bydefault created security group for the instance and allows ALL THE PORT, Expect port 25
 10) AWS bydefault deny inbound traffic
 
+PORT 25
+--
+1) AWS does not allow outbound traffic for the PORT 25, Because it is mailing service
+2) AWS by default allow port 25, because of any spaming activites etc
+
+NACL (Network Access Control List)
+--
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/df4ec36a-aef0-4e24-9d1f-2989dadcfc27)
+1) Security group is applied for EC2 instance level, where applied at the subnet level
+2) Ex: Devlopment team used EC2 instance with Jenkins server and for easy use they have allowed all the port instead of 8080
+3) If devops engineers DENY TRAFFIC using NACL in the subnet level, even EC2 level is allowed then also appn will not get any traffic
+4) If something is applied to subnet level bydefault it will be applied to all the instances with in the subnet
+5) NACL will add additonal layer of security
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/7b0006c3-4205-4bce-b134-6b1c4d6f9267)
+7) We can also use NACL for automation
+8) Ex: If we have 10000 of EC2 instead of adding Security group, add NACL for the subnet then will be followed to all the EC2 instance present it is easy then using security groups.
+9) NACL == Deny traffic + Allow Traffic
+10) In security group we have only allow option
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/5c0e62fb-1a31-4c37-aef2-a76b8c3bfad3)
+1) ... lines represents virtual private cloud
+2) We have create virtual private cloud and provide IP ADDRESS RANGE, AWS bydefault will create Internet gateway, NACL, Route table
+3) additonal we will create EC2 instance and attach a security group for this EC2 instance 
 
   
