@@ -42,7 +42,7 @@ Create VPC
 3) select NAT gatways as 1 per AZ
 4) vpc ENDPOINT AS NONE
 
-ELASTION IP ADDRESS
+ELASTIC IP ADDRESS
 --
 1) IT is nothing but IP address which will remain same even if you GO DOWN THEN the INSTANCE
 2) It is like STATIC IP ADDRESS
