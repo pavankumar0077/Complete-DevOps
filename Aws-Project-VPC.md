@@ -32,4 +32,48 @@ Bastion Host or Jump Server
 3) Though that BASTION HOST or Jump Server we will connect to the ec2 instances
 4) Their will proper loggin machanism if we use BASTION HOST, We can configure rules and lot of other things.
 
- 
+# ===========================================================================
+
+NOTE: DOC REF : ``` https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-private-subnets-nat.html ```
+Create VPC
+--
+1) Select VPC and more if we select VPC only then we have to create lot of configurations like ipv4 v6 subnets and etc,Better to CREATE with VPC and MORE
+2) Check preview
+3) select NAT gatways as 1 per AZ
+4) vpc ENDPOINT AS NONE
+
+ELASTION IP ADDRESS
+--
+1) IT is nothing but IP address which will remain same even if you GO DOWN THEN the INSTANCE
+2) It is like STATIC IP ADDRESS
+
+Create EC2 with AUTO SCALING GROUP
+--
+CREATION OF TEMPLATE
+--
+1) Select EC2 instance --> from the left panel select Auto scaling groups --> create auto scaling group
+2) It can not be created directly we have to use Template as a reference -->
+3) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/3fa8a33f-bdad-4d7d-a02e-e0d7e3ad7d9d)
+4) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/e190b6c6-b04a-4ae7-8b8a-978be398cb37)
+5) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/9b2735c9-c1ba-421d-8d53-179527aaac64)
+6) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/4e5b6bb3-c128-4652-85cd-97918c344a25)
+7) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/6ec23a32-d6fc-4772-af78-2908e29a00e6)
+8) Rest of the settings are same, The port will be as per application best practise is only allow required ports.
+
+CREATE AUTO SCALING GROUP
+--
+NOTE: ALL the options are same only mentioned should changed
+1) select any name
+2) select create luanch template
+3) select vpc that you have created
+4) select availablity zones as per diagram app should be in private subnet so select 2 private subnets as per diagram
+5) Group size as per we need 2 increate to 2 and max to 4 as required based on the requirement
+
+Create BASTION Host
+--
+1) Now 2 instances are created by they dont have public ip addresses
+2) We have to create BASTION HOST IT works as mediatory from private instances and outiside to access the instances
+3) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/015d1cab-497d-4a4c-a76e-838725893f67)
+4) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/01c5c511-3a56-4de5-a655-8ff07f72ef1b)
+5) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/cbad9dba-d654-493b-82bd-b0e1d41fbc7a)
+6) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/4b0e0eb6-2417-49ca-9d4b-f4a5bfc5516a)
