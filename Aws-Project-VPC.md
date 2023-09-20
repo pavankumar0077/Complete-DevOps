@@ -77,3 +77,29 @@ Create BASTION Host
 4) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/01c5c511-3a56-4de5-a655-8ff07f72ef1b)
 5) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/cbad9dba-d654-493b-82bd-b0e1d41fbc7a)
 6) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/4b0e0eb6-2417-49ca-9d4b-f4a5bfc5516a)
+
+SSH to private instance using bation host
+--
+1) copy the key using scp from to bastion host
+2) from bastion host access the private instance using ssh
+3) ``` ssh -i devops-key1.pem ubuntu@18.233.153.160 ``` bastion host
+4) ``` ssh -i devops-key1.pem ubuntu@10.0.153.205 ``` private instance which have only private ip
+5) ``` python3 -m http.server 8000``` used to run python server for testing
+
+Create Load Balancer
+--
+**NOTE: It is Layer 7 Load Balancer which does HTTP AND HTTPS (APPLICATION LOAD BALANCER)** it 
+1) Go to EC2 instance on the left panel find load balancer
+2) It should be in public subnet
+3) Select application load balancer -->
+4) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/3a9f6e26-2b84-4292-b9bf-ca7b99cfb61a)
+5) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/e48b45ec-ec97-4fa8-ba24-10947767d077)
+
+
+Target group
+--
+**NOTE: WE HAVE TO DEFINE WHICH INSTANCES SHOULD BE ACCESSABLE**
+1) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/70107fab-a4f8-44a5-bc86-f84b8d6f2200)
+2) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/e47c290f-ab5f-4260-95de-103991664782) ``` include as pending below ``` ``` and click on create target group ```
+
+
