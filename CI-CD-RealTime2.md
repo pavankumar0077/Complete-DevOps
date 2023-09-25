@@ -117,6 +117,7 @@ pipeline {
 1) tools we need to configure what tools we are using in the pipeline according to the  tools -- name that we have mentioned in the tools sections in the config
 2) for sonar we need to create env and we need to mention the name of the sonar server which will be present in the configure jenkins - system
 3) for nexus we need to add the dependencies in pom.xml file
+4) REF LINK : ``` https://datacadamia.com/maven/distribution_management ```
 ```
 <distributionManagement>
     <repository>
