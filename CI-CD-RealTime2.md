@@ -6,7 +6,6 @@ Plugins used
 1) Sonar
 2) Docker
 3) OWASP Dependency check
-4) Nexus Repo management
 5) config file provider -- for nexus repo
 6) Plugin maven integration
 
@@ -40,6 +39,12 @@ pipeline {
             }
         }
         
+        stage('Trivy Fs Scan') {
+            steps {
+                sh "trivy fs ."
+            }
+        }
+        
         // File system scan dependency 
         stage('OWASP FS-Scan') {
             steps {
@@ -62,12 +67,52 @@ pipeline {
         
         stage('Build') {
             steps {
-               sh "mvn package -DskipTests=true"
+                sh "mvn clean package -DskipTests=true"
+            }
+        }
+        
+        stage('Deploy To Nexus') {
+            steps {
+                withMaven(globalMavenSettingsConfig: 'global-settings-xml') {
+                    sh "mvn clean deploy -DskipTests=true"
+                }
+            }
+        }
+        
+        stage('Build & Tag Docker Image') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+                        sh "docker build -t shopping-cart -f docker/Dockerfile ."
+                        sh "docker tag shopping-cart:dev pavan0077/shopping-cart:dev"
+                    }
+                }
+            }
+        }
+        
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+                        sh "docker push pavan0077/shopping-cart:dev"
+                    }
+                }
+            }
+        }
+        
+        stage('Deploy Application') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
+                        sh "docker run -d --name ekart -p 8070:8070 pavan0077/shopping-cart:dev"
+                    }
+                }
             }
         }
         
     }
 }
+
 ```
 1) tools we need to configure what tools we are using in the pipeline according to the  tools -- name that we have mentioned in the tools sections in the config
 2) for sonar we need to create env and we need to mention the name of the sonar server which will be present in the configure jenkins - system
@@ -133,4 +178,12 @@ EX:
 12) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/597229a8-a63d-4228-bcbb-6c1e9d79f897)
 13) Check the nexus repo to find the artifacts
 14) Trivy is used for file system scan as well as docker image
-15) 
+
+NOTE: CHANGE SETTINGS IN THE NEXTUS REPO FOR REALLOW THE ARTIFACTS FOR BOTH MAVEN-RELAESES AND MAVEN-SNAPSHOTS
+1) Click on settings icon and click on repositories
+2) Select -- Layout ppolicy as - Primitive
+3) Deployment policy -- allow redeploy
+4) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/2746f2a6-ee4a-41db-9d0d-455a52c580e5)
+
+
+REF link : https://github.com/jaiswaladi246/Ekart.git
