@@ -39,7 +39,7 @@ CFT TEMPLATE STRUCTURE
 1) Resources are imp (Mainly)
 2) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/c5882a85-771c-4eea-a4da-8b89090ea631)
 
-**CFT DOCS** : ``` https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html ```, ``` https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html ```, ``` https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html ```
+**CFT DOCS** : ``` https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html ```, ``` https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-guide.html ```, ``` https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html ```, ``` https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-versioningconfig.html ```
 
 ```
 
