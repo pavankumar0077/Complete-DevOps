@@ -71,6 +71,9 @@ How to create an alarm on specific uasge
 13) Check the SNS topic as your CPU will be reached 50 %
 14) Alarm is ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/db60588c-8d20-4a72-928d-86f367d2b5cb)
 15) You will receive email ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/5fc3d834-91b2-4921-b0ef-85d22de05d35)
+16) We can create dashboard --> name of the dashboard --> select metrics
+17) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/ee6bed23-3a8b-4d1a-9ca9-d43200c31f96)
+
 
 
 
