@@ -61,4 +61,26 @@ Resources:  -- WE CAN CREATED ANY NO.OF RESROUCES
             DeleteOnTermination: false
             VolumeSize: 20
 ```
+DOCS FOR EC2 : ``` https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html ```
+CREATE CFT
+--
+1) AWS console --> Serach for CloudFormation --> Create Stack (USED TO CREATE TEMPLATES) --> iT WILL CONVERT TO API CALL AND SENDS
+2) Select create template in designer and create template in designer
+3) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/5c240a50-1569-4900-8110-cdb9926f79c8)
+4) drag and drop the resources that are needed and add the properteries or metadata and etc to it.
+5) opiton 2 : ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/5f4b88e1-43c9-4b0d-b61b-dab72389afe2)
+6) give name --> next --> next --> submit (no need to change anything)
+7) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/0f3568e2-6033-49e3-a4a9-637c3d6ff8df)
+8) AWS will store all the templates that we have in S3 bydefault
+9) DRIFT DETECTION : IF SOMEONE MANUALLY CHANGED IN THE WEB UI WE CAN CHECK THE CHANGES
+10) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/a9ca6849-6c99-4697-a259-1e4a1143bab7)
+11) After clicking on drift detet wait for 1 or 2 minutes to detec
+12) Click on view drift results
+13) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/8abad643-13d8-4929-89c9-43ef5aa5ca62)
+14) Now you can see the exact action what is done
+15) Check for bucket logging to find who did it
+
+TO write the CFT perfectly 
+--
+1) Install YAML, AWS ToolKit extensions in VS-CODE 
 
