@@ -19,3 +19,13 @@
 2) Step1: To fetch all the EBS snapshots
 3) Step2: To filter out the snapshots that are STALE.
 4) Step3: Identify and delete the sanpshots
+
+Solution:
+--
+1) Create EC2 instance
+2) Create Snapshot --> EC2 dashboard --> Snapshot
+3) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/629529a6-a4a2-47ad-b81c-2152d3f70b21)
+4) create it
+5) After using Instance and he deleted the instances (volume will be deleted automatically with the instance)
+6) He forgot to delete the SNAPSHOTs
+7) 
