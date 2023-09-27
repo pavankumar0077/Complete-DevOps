@@ -97,6 +97,10 @@ def lambda_handler(event, context):
                     print(f"Deleted EBS snapshot {snapshot_id} as its associated volume was not found.")
 ```
 
+Do with CloudWatch
+--
+1) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/33d789fd-36b1-45f4-995d-98269f0aa515)
+2) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/b6edeb57-fa1c-4a72-b898-d575c26db1c4)
 
 
 
