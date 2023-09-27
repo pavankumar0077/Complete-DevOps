@@ -57,6 +57,7 @@ Implementation
 
 CODE 
 --
+``` https://github.com/pavankumar0077/aws-devops-zero-to-hero/blob/main/day-18/ebs_stale_snapshosts.py ```
 ```
 import boto3
 
@@ -103,5 +104,5 @@ Do with CloudWatch
 2) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/b6edeb57-fa1c-4a72-b898-d575c26db1c4)
 
 
-
+BOTO 3 DOCS : ``` https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html ```
 
