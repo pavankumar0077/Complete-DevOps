@@ -45,3 +45,19 @@ EC2 instance and recommed you to delete it this information is shared by the scr
 - If we go with serverless architecture we just have to say to CLOUDWATCH every day 10 am trigger this Lambda fucntion. (We have to use CLOUD WATCH be'coz these lambda functions are event driven)
 - It has to driven by an EVENT. we configure a CRONJOB and we will trigger the lambda function
 
+Serverless Uses
+--
+- Cost Optimization *
+- Security/Compliance *
+
+ How lamba is used in security ?
+ --
+ ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/0c48b13c-aa53-4648-8a8f-91925d9754a6)
+ - Let's say your organization decided that nobody will create a EBS volume of type GP2. (GP2 has security issues)
+ - If one dev by mistake created EBS volume with GP2
+ - We can write a Lambda functin saying that this lambda should run everyday at 10 am to verify there are any GP2 based volumes in AWS account
+ - IF there are any. We can trigger a notification using SNS. to the dev
+ - Or some dev created S3 with public -- at this time also we can use lambda function to check and run SNS
+
+
+
