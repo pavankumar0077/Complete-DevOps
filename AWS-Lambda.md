@@ -59,5 +59,20 @@ Serverless Uses
  - IF there are any. We can trigger a notification using SNS. to the dev
  - Or some dev created S3 with public -- at this time also we can use lambda function to check and run SNS
 
-
+Create a Lambda function
+--
+1) Search for lambda functions
+2) Create with none, blueprint or other options select as per requriement
+3) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/e95bfd6c-a1fa-4dff-8671-20f1cb4e4277)
+4) Use IAM user, for this demo i am using none
+5) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/a80c26f6-2c32-46bd-acbf-5668e3007e4a)
+6) Rest all are default values --> create function
+7) create a test event and click on test to  check whether it is working or not.
+8) function name should be same : lambda_handler is like main function like java main. We cal also edit the name of the function in config
+9) we can add files or folder like requirements.txt
+10) We can write the code in local as well and upload the zip file
+11) Like we use env variables we can also use that in lambda functions as well.
+12) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/e76e8991-ebbc-42cf-9699-90707a3844fa)
+13) Bydefault when we created lambda functions. a role will be created. If you dont want to use that role. During the creation of function assign your existing role to it
+14) We can change in Change default exection role -- and select role accordingly
 
