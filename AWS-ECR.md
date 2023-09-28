@@ -82,8 +82,39 @@ REF LINK3 : https://mrdevops.hashnode.dev/compare-amazon-ecs-vs-eks
 
 AWS ECS - Create container
 --
+Step 1:
 1) Search for ECS -->
 2) Here we are going with serverless fargate
 3) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/ed1de977-ad2f-439c-9158-1e7e4a9d783c)
-4) 
+4) Create docker image and push to ECR
+
+Create ECR and push image
+--
+```
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 794982227033.dkr.ecr.us-east-1.amazonaws.com
+docker build -t 794982227033.dkr.ecr.us-east-1.amazonaws.com/demo-repo:latest .
+sudo docker images
+docker push 794982227033.dkr.ecr.us-east-1.amazonaws.com/demo-repo:latest
+```
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/1eed5f2a-d2cc-414e-9101-9a694e191621)
+
+Create Container ECS
+--
+Step 2 : Click on Task Defination
+1) Task role -- container wants to talk to any other service like cloudwatch or s3 etc
+2) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/d807c05f-4dce-42da-8a22-a2c356e96030)
+3) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/9fa0d078-230e-4385-a31b-4b4d1beb5059)
+4) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/49f60d62-47ac-4ea7-9d23-6b11d3a5faff)
+5) Remaining details are same
+6) Create it
+7) Run the task defination : ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/21dab25a-4ab9-43b0-b7f6-06c4b34b19be)
+8) If you need anything to change you can do it ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/f1a75155-5b54-47ea-be10-2c27d49d04e6)
+9) Cluter : ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/f8f5fbb1-13f1-4857-a29b-1e854fdba6e8)
+10) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/6def1ab9-a396-441a-aaf3-5b7b2cb8251a)
+11) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/8639c403-7c48-4ca6-80f0-4302ae48150b)
+12) Logs from cloudwatch : ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/80df21fa-4107-44e1-9f0b-3822a33628d0)
+
+
+3) Task execution role -- Agent wants to talk with other services
+4) Task execution -- integrate with cloudwatch 
 
