@@ -26,4 +26,7 @@ Push images to ECR
 3) Click on Repo and click on view push commands
 4) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/9a208e5d-e349-4229-8ac5-bc504bad57a7)
 5) ECR login usig AWS CLI - Similar to docker login using CLI ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/7601f709-b1cf-4b76-b2ec-0bbc095bcc2a)
-6) 
+6) **NOTE : DOCKER SHUOLD BE INSTALLED BEFORE USING THIS**
+7) and follow the commands to push
+8) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/e64fbce8-d47a-4c78-9ceb-fb95d2d104cd)
+
