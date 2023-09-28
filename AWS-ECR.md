@@ -30,3 +30,60 @@ Push images to ECR
 7) and follow the commands to push
 8) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/e64fbce8-d47a-4c78-9ceb-fb95d2d104cd)
 
+# ----------------------------------------------------------
+------------------------------------------------------------------------------
+Problems with docker
+--
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/889aaf9f-e9c6-41ed-99fd-3a2bf0494790)
+- Auto Scaling
+- Auto Healing
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/a83b5993-07f6-4138-984e-0b5d31464b7d)
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/11b7298b-0d09-428a-8b79-7bbc6d2a9543)
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/ebf9d565-ce10-4d92-8931-d050a8ca74fc)
+
+ECS only for AWS 
+- ECS does not have all the features of KUBERNTES
+- Kubernetes have Custom Resource Definiations --  Extend the capability of kubernetes
+- Kubernetes -- we have use ingress controller + we have lot of controllers we can add to it 
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/0867470d-dcb1-4b32-83eb-a8f0b2354dd9)
+
+ECS advantages
+--
+- Server - EC2
+- Serverless - Forgate
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/b62214ee-6605-46ff-9127-b7a9ba572317)
+
+EKS
+--
+- Simple architecture
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/fc792766-544b-49ca-aa0c-83d42de50a85)
+
+Structure of ECS
+--
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/0911c321-0309-4e7b-98b5-b0f44f5f87c7)
+
+1) We have to create a CLUSTER on aws
+2) Fargate or EC2
+3) Task defination (Like pod)
+4) Task is one which is running the Container
+5) Once the containers are running we can add the SERVICE
+6) this SERVICE will add Load Balancer, Ingreee policies
+7) It have IAM
+
+REF LINK 1 : https://github.com/pavankumar0077/aws-devops-zero-to-hero/tree/main/day-20
+REF LINK 2 : https://github.com/pavankumar0077/aws-devops-zero-to-hero/tree/main/day-21
+REF LINK3 : https://mrdevops.hashnode.dev/compare-amazon-ecs-vs-eks
+
+AWS ECS - Create container
+--
+1) Search for ECS -->
+2) Here we are going with serverless fargate
+3) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/ed1de977-ad2f-439c-9158-1e7e4a9d783c)
+4) 
+
