@@ -69,7 +69,7 @@ talk to the applicaiton load balancer from the application load balancer request
 - Or if the load balancer is already there it will configure the load balancer for the RULES MENTIONED IN THE INGRESS RESOURCE. Like (Example.com --> Service --> pods) these rules should be configured in the INGRESS RESOURCE. INgress.yaml have these things (example.com --> service --> pod) there has to be a load balancer to performs this actions that load balancer will be NIGINX LOAD BALANCER OR APPLICATION LB OR F5 LB Depending up on the ingress controller that we are using
 - WHAT HAPPENDS IF WE CREATE NGINX INGRESS CONTROLLER, ALB INGRESS CONTROLLER AND EVERYTHING IN THE SAME CLUSTER THEN WE CAN DEFINE IN THE INGRESS ITSELF LIKE WHO SHOULD ACCESS THIS INGRESS RESOURCES WE can Ingress class here we can define who access to access the infress resource.
 
-Finally
+Finally Flow
 --
 - Devops engineer along with the POD, SERVICE, CREATE INGRESS FOR EVERY RESOURCES OR EVERY POD THAT NEEDS ACCESS FROM THE EXTERNAL WORLD
 - There will be one INGRESS Controller that will watch for all the ingress resources and it will configure the LOAD BALANCER
