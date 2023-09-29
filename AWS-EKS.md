@@ -73,4 +73,77 @@ Finally Flow
 --
 - Devops engineer along with the POD, SERVICE, CREATE INGRESS FOR EVERY RESOURCES OR EVERY POD THAT NEEDS ACCESS FROM THE EXTERNAL WORLD
 - There will be one INGRESS Controller that will watch for all the ingress resources and it will configure the LOAD BALANCER
-- USER -- will take to the LOAD BALANCER -- FROM THE LOAD BALANCER WHICH IS IN THE PUBLIC SUBNET REQUEST WILL COME TO THE POD THROUGHT SERVICE TO THE POD 
+- USER -- will take to the LOAD BALANCER -- FROM THE LOAD BALANCER WHICH IS IN THE PUBLIC SUBNET REQUEST WILL COME TO THE POD THROUGHT SERVICE TO THE POD
+
+
+# ---------------------------------
+DEMO
+# ---------------------------------
+
+FOLLOW THIS LINK : 
+https://github.com/pavankumar0077/aws-devops-zero-to-hero/tree/main/day-22
+
+Create EKS cluster
+--
+- Recommened way to CREATE CLUSTER IS USING EKCTL CLI
+- COMMANDS ``` https://github.com/pavankumar0077/aws-devops-zero-to-hero/blob/main/day-22/installing-eks.md ```
+- Use this command to create cluster ``` eksctl create cluster --name demo-cluster --region us-east-1 --fargate ``` while creating if there are any errors. Please delete the CFT CloudFormation Stack and re-try
+- It create everything that we required like it will create public private subnet for us IN VPC. In the private subnet we place our applications -- All this things are taken care by ekstcl utility
+- OPEN ID CONNECTOR PROVIDER : For the cluster what we have created we can provide IDENTITY PROVIDERS LIKE Okta, KeyClock, LDAP
+- We can use IAM, But if you want to use any othe identity provider we can INTEGRATE with OpenID connect.
+- FROGATE PROFILE -- IS ATTACHED TO default Frogate profile that means we can deploy in default and kube-system namespaces only. If we want add then we can use Add Fargete profile.
+- Instead of always going to WEB UI and verifing the resources, Use we can use kubectl command line
+- Use this command to get the kubectl ``` aws eks update-kubeconfig --name demo-cluster --region us-east-1 ```
+-  ``` aws eks list-clusters ``` to list the clusters
+-  Crating FORGATE PROFILE here we are attaching the namespace game-2048
+```
+eksctl create fargateprofile \
+    --cluster demo-cluster \
+    --region us-east-1 \
+    --name alb-sample-app \
+    --namespace game-2048
+```
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/6a57a30e-2f5a-415f-99b3-48ef2cf39460)
+- We can create instance in both namespace of game-2048 namespace. If your using EC2 then no need to do this step
+- ``` kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/examples/2048/2048_full.yaml ``` THIS COMMADND WILL CREATE POD, DEPLOYMENT, SERVICE, INGRESS (Route the traffic inside the cluster)
+- Now we have to create INGRESS CONTROLLER TO ACCESS THE APPLICATION. THAT ACCESS ``` ingress-2048 ``` And it will CREATE LOAD BALANCER AND CONFIGURE --> Inside the ALB target group and ports and etc it will create for us.
+- Before ingress controller we need to configure IAM OICD
+- Now Go to ALB CONNECTOR ``` https://github.com/pavankumar0077/aws-devops-zero-to-hero/blob/main/day-22/alb-controller-add-on.md ```
+- ALB CONTROLLER --> pOD --> ACCESS TO AWS SERVICES SUCH AS ALB
+- Create IAM POLICY ``` curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/install/iam_policy.json ```
+- Create I AM POLICY ``` aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-document file://iam_policy.json
+  ```
+  - ATTCH ROLE TO SERVICE ACCOUNT OF THE POD
+  ```
+  eksctl create iamserviceaccount \
+  --cluster=demo-cluster \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --role-name AmazonEKSLoadBalancerControllerRole \
+  --attach-policy-arn=arn:aws:iam::794982227033:policy/AWSLoadBalancerControllerIAMPolicy \
+  --approve
+  ```h
+  - NOW WE WILL USE THE SAME SERIVICE ACCOUNT AND ACCESS THE APPLICATION
+  - CREATING ALB CONTROLLER -- WE ARE USING HELPCHART ``` helm repo add eks https://aws.github.io/eks-charts ```
+  ```
+  helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system \
+  --set clusterName=demo-cluster \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller \
+  --set region=us-east-1 \
+  --set vpcId=vpc-099982b8d4a5a1094 
+  ```
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/aac06c01-4ca8-40d6-ba4c-6a91b21b668f)
+- ``` kubectl get deployment -n kube-system aws-load-balancer-controller ``` check for controller is running or not
+- ``` kubectl get pods -n kube-system ``` -- This will create it kube-system namespace
+- ``` kubectl edit deployment -n kube-system aws-load-balancer-controller ``` if we get any error then we have to lookk here in the status or descibre option to find the error.
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/65d5a12b-378e-45e5-8d8e-6bcfe1c66d22)
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/650a1a3b-6d25-4429-8514-835dde512109)
+- This Load Balancer Controller had created --> How --> We submitted a ingress resources
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/58ba1297-a9c7-4c61-857d-2a4034e2cf16)
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/6651705d-c6a3-4a13-af74-acd3ca5ff0de)
+- FINALLY APPLICATION WILL BE ACCESSED
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/a2a4cf75-7112-45a2-9e04-79bc4da70150)
+
