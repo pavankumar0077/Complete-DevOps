@@ -21,5 +21,75 @@ Solution -- Jenkins Shared Library
 6) - vars
    - src
    - resources
+  
+Normal pipeline
+--
+```
+pipeline {
+    agent any
+
+    stages {
+        stage('Greetings') {
+            steps {
+                echo 'Hi Techie'
+            }
+        }
+    }
+}
+
+```
+Step 1: Create a Git Repo for JENKINS SHARED LIBRARY
+Step2 : Create vars folder --> Create the scripty --> maven-test.groovy (Ex) (Camalcase - helloWorld.groovy)
+Step3: Congigure the shared library in jenkins --> Managme jenkins --> systems --> Global piple 
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/3b371921-2e5d-4ea6-b127-e16f9525a1bd)
+Step4: In the jenkins file we have to import the shraed lib --> ``` @Library("my-shared-library") _ ``` Here _ is represents everything in the library
+
+Shared lib pipeline
+--
+```
+@Library("my-shared-library") _
+pipeline {
+    agent any
+
+    stages {
+        stage('Greetings') {
+            steps {
+                helloWorld()
+            }
+        }
+    }
+}
+```
+Here we are using helloWorld() --> IT IS FILE NAME NOT THE FUNCTION NAME 
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/b9786411-d25c-4b38-99c8-cff7864070e2)
+
+```
+```
+def call() {
+  sh 'mvn clean install'
+}
+
+```
+```
+@Library("my-shared-library") _
+pipeline {
+    agent any
+
+    stages {
+        stage('Greetings') {
+            steps {
+                helloWorld()
+            }
+        }
+        
+        stage('Maven Build') {
+            steps {
+               mvnBuild()
+            }
+        }
+    }
+}
+```
+
 
 
