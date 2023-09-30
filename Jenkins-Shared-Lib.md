@@ -64,12 +64,11 @@ Here we are using helloWorld() --> IT IS FILE NAME NOT THE FUNCTION NAME
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/b9786411-d25c-4b38-99c8-cff7864070e2)
 
 ```
-```
 def call() {
   sh 'mvn clean install'
 }
-
 ```
+
 ```
 @Library("my-shared-library") _
 pipeline {
