@@ -1,0 +1,33 @@
+Infrastructure as code
+======================
+
+Dev --- CFT (Automated) --- AWS
+		        --- Azure ( Azure Resource manager)
+
+Openstack == used to create your own cloud uses ( Heat template to automate )
+
+Explaination
+-===========
+For example org wants to use hybird or want to move to another clooud provider at that we have to learn more things to address these problems we have Terraform in the picture
+
+
+
+Terraform
+=-=========
+ --- API as code
+-- Terraform is developed by Hashicorp
+-- Terraform slove the solution to learning to many tools 
+
+Terraform is used to automation the clouds provider
+Terraform is used to migrate from other clouds
+
+-- Terrform script will talk to the cloud provider to create infra
+-- Once we provide the detials terraform will create (provider.ts)
+
+API = App programming interface
+-- We can talk with google api and get the response
+
+
+
+
+

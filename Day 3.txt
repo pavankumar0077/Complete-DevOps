@@ -1,0 +1,7 @@
+Requested VM (10gb, 12 cpu ) ---- Aws will recieved the request. It will look for which Physical server ideal for my requirements. Now AWS will ask the hypervisor that is installed on some physical server lets say p100. AWS sends a request to hypervisor that is installed on p100. to create a VM and AWS will sends back the VM it willl send some details of the VM and access. Physically we are not owning that VM. We just have logical access or virtual access to that VM.
+
+
+Data centers --- Store all the physical servers
+
+Hypervisor -- Software that creates logical memory or space for the servers
+

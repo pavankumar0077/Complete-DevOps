@@ -1,0 +1,14 @@
+
+Git docs
+https://git-scm.com/doc
+
+Deploy your app to aws
+=======================
+Step 1:
+    -- Github clone it to Local Repo
+
+Step 2:
+   -- Check in the local machine 
+	-- create .env file ( . ) represents hidden file
+	
+

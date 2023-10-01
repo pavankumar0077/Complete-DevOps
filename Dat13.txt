@@ -1,0 +1,52 @@
+200 services
+-- Cloud provider
+-- IASS PASS
+
+-- Aws -- Service model
+
+
+Services Devops must know
+==========================
+--1. EC2
+--2. VPC (Virtual private cloud)
+	-- Secure -- Security
+		-- CIDR
+		-- Inbound
+		-- Outbound
+		-- Subnet 
+--3. EBS (Volume)
+--4. S3 bucket ( Storage ) -- encrypted bydefault in 			now-a-days
+		       --  Versioning
+--5. IAM (Identify & Access Management)
+--6. Cloud Watch (Monitoring)
+--7.  LAMDA (Serverless)
+
+Cloud Build services
+===================
+8.    CI/CD (Jenkins)
+-- AWS Code pipeline -- Like jenkins pipeline (node, actions, maven target)
+
+-- AWS Code Build -- (Fully managed build service takes care of compile the code, run test, provides some software pkgs)
+
+-- AWS Code Deploy -- (Deploying your apps in ec2 or on premises )
+
+9. AWS configuration
+10. Billing & Costing
+11. AWS KMS (Key management service) (Cerficates)
+12. Cloud Trail (Used to operations and risk additing, Compliance, Governance), Info of API Logs for 30days like that, Records of api logs, logs recorded for certain period of time.
+13. AWS EKS (Kubernets - Elastic kubernets service -- 100% devops engineer should know) (Managed kubernets by aws)
+14. Forgate (Without Kubernets), ECS (Without using kubernets)
+15. ELK ( Elastic search, Log search, and Kibana search)
+	-- Elastic search is imp
+
+Difference b/w Lamda and ec2 ?
+-------------------------------------
+-- Lamba : Executing something without using server
+	-- Serverless computes wch are used for 	short actions (Automatically)
+-- EC2 : Bydefault it will compute using server
+
+Difference b/w EKS vs ECS ?
+----------------------------------
+Both of them are container orchesation solutions
+but ECS is aws provided solution
+-- ECS is aws protritary service where EKS is managed kubernetes service

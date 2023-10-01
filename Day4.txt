@@ -1,0 +1,22 @@
+Senario : Need 100 VM to be created.
+-- Manually create one by one 
+
+-- By doing automation
+-- Using script, AWS EC2 api we can create 100 vm automatically
+
+
+Hybrid cloud pattern :
+-- VM in one cloud platform
+-- other resouce infrastruce in other cloud platform
+
+
+Console 
+-- Services 
+-- Compute
+-- EC2
+-- Launch Instance
+	-- Name
+	-- instance type -- free tier
+	-- create key pair name * ( Allow to login to 	instance )
+	-- Rest of the settings are same no need to 	change
+	-- 

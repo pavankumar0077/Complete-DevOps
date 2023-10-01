@@ -1,0 +1,115 @@
+git init == To initialize a local repo
+-- ls -a
+
+Tracking logging -- .git is used
+.git/hooks/pre-commit == to know
+
+ls -lrta
+
+rm -r git-devops-demo/
+=====================
+To delete dir
+
+
+To check changes use git diff
+================================
+ubuntu@ip-172-31-93-78:~/gitdemo$ git diff
+diff --git a/cal.sh b/cal.sh
+index eb48a9e..191070f 100644
+--- a/cal.sh
++++ b/cal.sh
+@@ -1,3 +1,4 @@
+ #!/bin/bash
+
+ # Addition function
++x=1+2
+ubuntu@ip-172-31-93-78:~/gitdemo$
+
+If you agree with changes then use git add cal or git add . ( Here if we use . then all files will be added )
+
+or 
+
+if we don't want changes then use 
+git checkout cal
+
+===========================
+-- git init
+-- git add . or git add cal
+-- git commit -m "lsldf"
+
+===============================
+
+git add
+git commit -m ""
+git push
+
+==================================
+
+git remote -v
+== to check remote push or fetch is there or not
+
+
+-- We can clone the repo by 2 ways 1 is using https and other is using ssh
+
+1 way
+=====
+git clone ....
+it will ask for password in some cases
+
+2 nd way
+=========
+git clone ....
+it will ask for public key to generate public key use this
+
+ssh-keygen -t rsa
+
+--- id_rsa.pub file
+-- open the public key and copy in github 
+-- settings -- ssh keys -- new ssh key
+-- title key and add
+
+=================================
+Difference b/w clone and fork
+-----------------------------------
+-- We go to any repo and we clone that pulic repo to local and do development of that ( Clone )
+
+-- Fork -- Multiple copies of repo and create replicas 
+Create a copy of repo
+
+============================
+git merge
+git rebase
+git cherry-pick -- picking the commits
+
+To merge the code from other branchs to main or master branch
+
+git log dev-1.0.1 ( branch name)
+git checkout dev-1.0.1 && git log 
+
+Above 2 commands are same
+
+
+-- If we want to get changes from one branch to another branch -- then i easy way is to use cherry pick
+
+-- If cherry pick is easy if there is one or 2 commits 
+but if we have more commits then use git merge or git
+rebase
+
+differnce b/w git merge and git rebase
+----------------------------------------------
+-- Git rebase
+
+
+-- Git merge
+
+git log --oneline == To get the logs in one line
+
+NOTE: If you are in git log with long commit and then to exit use q
+press q 
+
+-- If we got any merge conflict then fix the conflict and again use 
+git rebase --continue
+
+
+================================================
+

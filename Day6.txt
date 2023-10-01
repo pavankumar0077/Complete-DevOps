@@ -1,0 +1,72 @@
+Operating System
+=================
+
+User ::
+-- As a user we are trying to install a software/app'n --> It is talking to the OS. --> It is talking to Hardware 
+
+wise versa
+=-=========
+Hardware --> OS --> Appn/Software 
+
+Linux == Open source 
+Windows = Propritary
+
+Kernel == Heart of the OS, The responsibility of the kernel is to establish a communication b/w your H/W and S/W 
+
+Kernel is used for 
+-- Device management
+-- Memory management
+-- Process management
+-- Handling system calls 
+
+
+Fundamentals of Shell Scripting
+==============================
+-- Shell is the way to talk to OS
+
+pwd -- present working dir
+ls -- list the content present in dir
+ll -- list the contents with permissions
+ls -a -- list the hidden files 
+cd -- to go to folder change dir
+cd .. --- To go back
+cd ../.. -- to go 2 dir's back
+cd ~ -- to go to home dir directly
+
+ls -lrt or ls -lrta
+ls -ltr -- To get permission and more details of the files
+Ex: drwxrwxr-x 2 ubuntu ubuntu 4096 Jan 14 08:43 pavan
+
+Here drwxrwxr -- here --  d -- means -- dir
+If it doesn't starts with - d - then it is file 
+
+
+touch pavan -- to create a file
+
+rm check.txt -- to remove the file ( Used to remove only file )
+
+rm -r pavan -- to remove dir 
+
+nano check.txt -- to will create a file and opens the nano editer
+
+cat check.txt -- to display the content in the file
+
+To check the memory or performance in linux 
+---------------------------------------------------
+free or  free -g -- It will show all the memory used and free space
+
+nproc -- Used to find no. of cpu's
+
+df
+df -h
+df -m  --- Used to find the disk size 
+
+top -- Used to get all the details like memory cpu and etc
+
+free -g, df -h, nproc -- All the 3 commands details we can see in top command 
+
+systemctl -- To know services running 
+
+
+ 
+

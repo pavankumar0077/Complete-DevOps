@@ -1,0 +1,104 @@
+CI = Continous integration == Ensure build is smoth, test case, code quality maintained, Image is created and etc
+
+CD = Continous delivery == deployment or delivery process is done (K8's) 
+
+When dev committed his code to git repo == how jenkins will get notifited (Interview question)
+
+Jenkins can continously poll the git or we can configure build triggers in jenkins but most effective way is using webhooks 
+
+if we are poll  continously to git then jenkins will contionusly connect to git and try to get the information so it is making lot of api's calls to the git where are if we are using webhook  
+
+Multiple ways to use triggers
+== Mostly used webhook only sends notifications to jenkins only when webhook is triggered only when certain action is triggered llike on PR's and etc 
+
+==> Declarative pipelines are easy to learn and easy
+==> Sricpted are hard
+
+
+* What are the agents you are using in your jenkins
+-- Docker agents ( Lightweight and very useful ) 
+
+
+When we use webhooks git only send notification to jenkins 
+we can configure by using jenkins and getting webhook url and put in github settings -- webhooks -- for which action this webhook is to be triggered (like commit, PR, issues and etc)
+--> When dev raise the PR our git will send a notification to jenkins and ask jenkins to trigger the pipeline and this is where devops engineer role will be started 
+--> we will write jenkins file, -- Using jenkins file we are trying to perform certain actions on jenkins
+-- set of files
+Maven = build
+
+configure maven plugins 
+---------------------------
+1) Maven settings -- configure system -- install maven
+2) For each of these stages we can use a docker agent, When we are using docker agent we don't need to worry about the installations at all (we can skip the installations and configurations)
+
+
+Build (success ) == unitest == static code analysis  == SonarQube ( Code quality % ) 
+If no then docker image usng docker build we will get docker image and we will sent it to docker register or docker register 
+(Dockerhub, ECR, quary.io )
+
+Build (failed) -- configure alert ( email or slack notifcations) 
+
+==> At the end of CI we will have Image ready with new tag --> Docker registry
+
+==> ****** HOW does CI and CD communication with each other *****
+-- After We are getting image from CI how CD will get triggered
+
+Tradational way -- Ansible playbooks, Shell scripts and they will include in CI pipeline for CD as well
+
+Once the image is regsitry they use ansible or shell scripts to pull or deploy the artifacts to kubernets or other orchestration
+
+Problem is it is not scalable and ansible is not designed for CD
+
+choose CD tool == Best tools are GitOps based tools
+
+Create a git repo and that contains application manifest files 
+like kubernet pods or deploy or service.yml files or helm chart
+
+ARgo image updateer == will continously monitor the docker hub or any of the container registriies we used when ever new image is pushed to container image registry ARGO IMAGE UPDATER will directly udpate the git repo which is created for manifest files 
+
+==> Moinitoring the container registry
+==> Updating the git repo 
+
+
+Argo CD
+========
+Which is continously watching the mainfest git repo and whenever there is any change in the get repo it will take the new pod.yml or helmchart or deply or etc and deploy in the kubernets 
+
+ 
+========================================================
+Explaination  (CI)
+===========
+
+1) Git repo -- app'n source
+2) Dev raised PR -- configured webhooks, Using the webhooks trigger the jenkins pipeline (Declerative jenkins pipeline -- easy to write and collabrate)
+3) as part of declerative jenkins pipeline we run multiple stages 
+----- Build stage -- Using MAVEN if build is successfully -- then unit test 
+
+----- Static code analysis -- Verify app'n is not explosed to any static code 
+
+
+----- SAST/DAST -- To verify app'n security if this new change that dev is made will make any security vulnerablity
+
+		||||
+		||	
+	Any of these fails an email notification will be send to the thought slack or others 
+
+====> If all the three are successfully or passed then we go forward or we could create a DOCKER IMAGE ( We are creating simple shell targets out of the docker file which you are stored in the git repo as soon as DOCKER Image is created
+again using the shell commands we push this docker image to  container registry (Dockerhub, ECR - amazon or Quay.io )
+
+Explaination CD
+===============
+== Once the image is pushed to ECR or any container registry
+
+We have a kubernets cluster  == Inside the kubernets cluster we have deployed two continous delivery tools one is your ARGO IMAGE UPDATER and other tools we have is 
+ARGO CD
+both of these 2 are kubernets controllers that we have deployed on our kubernets cluster. What they do is 
+1) ARGO image updater ==  Contiously monitor the image registry and as soon as new image is created it will pick the new image and update new image to other git repo we have and in this git repo is purely for the image manifest (i.e for helm charts, kustomize, pods.yml or etc )
+
+== As soon as our github repo is updated with new image the other controller we have ARGO CD will takes the update image and deploy on the kubernetes cluster 
+
+
+
+
+
+

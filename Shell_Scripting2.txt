@@ -1,0 +1,241 @@
+df == To print the disk space
+free == to get free memory on the disk
+nproc == to get the no. of cpu's
+top == helps to get the node status
+=======================================================
+
+Ex of script which show the output of the node health
+
+#!/bin/bash
+
+##########################
+# Author: Pavan
+# Date: 15/01/2023
+#
+# This script outputs the node health
+#
+# Version: v1
+##########################
+
+set -x #debug mode
+
+#echo "Print the disk space"
+df -h
+
+#echo "Print the memory"
+free -g
+
+#echo "Print the CPU"
+nproc
+
+=======================================================
+-- Here set -x is used to run the script in debug mode
+-- Echo we are not using be'coz of if we have 100 commands then we can't write 100 echo statements instead we are using set -x
+
+ps -ef === Used to find the processes  
+ps -- stands for processes
+ef -- gives the entire details of the processes
+
+To filter the output we use grep command
+Ex: ps -ef | grep "snapd"
+
+grep == Is used to filter with specific keyword
+Note : Here ps -ef | grep "snapd"
+Here | is called pipe and it is used as ps -ef output to frep "snapd" input
+It gives output of one command as a input to other command
+
+========================================================
+Ex: 
+echo 1
+echo 11
+echo 12
+echo 55
+echo 99
+-----------------------------------
+
+./test.sh | grep 1
+
+output :
+1
+11
+12
+
+Here it only filters 1 present in all the numbers
+
+=-=-========================================================
+date == Is the system command
+date == This command sends the output to stdin or stdout or stderr
+
+Note : Interview question
+date | echo "Today is"
+
+Ouput : Today is
+
+It will not print Today's date here be'coz date is the system default command and it sends the output to stdin but pipe | will be able to recieve the output from the stdin, Pipe | will send the data if date or any command sends the data from the 1st command 
+
+LEARN ABOUT 
+-------------------
+awk
+cut
+trim
+
+Differnece b/w grep and awk is
+grep == Will give entire output
+awk == Will give you specific coloum or row and any specific info we provide
+
+ps -ef | grep "logind" | awk -F" " '{print $2}'
+
+Ex: My name is Pavan
+      My empid is 234
+
+If we use Grep
+==============
+
+┌─[pavan@DESKTOP-FBB1C6S] - [~/Shell_Scripting_Abhi] - [2023-01-15 01:58:26]
+└─[2] <> grep name test2.sh
+My name is Pavan
+┌─[pavan@DESKTOP-FBB1C6S] - [~/Shell_Scripting_Abhi] - [2023-01-15 01:58:30]
+└─[0] <> grep empid test2.sh
+My empid is 2323
+
+If we use awk
+===============
+┌─[pavan@DESKTOP-FBB1C6S] - [~/Shell_Scripting_Abhi] - [2023-01-15 01:59:56]
+└─[130] <> grep name test2.sh | awk -F" " '{print $4}'
+Pavan
+
+-- Here print $4 is the coloum number as we can use My name is Pavan here on the 4th place we have name
+
+NOTE: When we use pipe symbol | in the scripts 
+We have use 
+set -e
+set -o pipefail 
+
+in the scrips these should be added in the script file in the start
+--- set -e == It exists the script when there is an error
+-- The script will exis when their is an error, If their is any error in the script then the script will not continue to next command
+-- Drawback of set -e is then their is set -o pipefail is used then set -e will not work, Be'coz set -e will check for the last command or last result of the pipe | 
+
+We can use set -xeo pipefail == But it is not recommended
+
+*) 100 apps are running, But one app is faile then we have to check in logfile
+
+curl
+====
+curl == This command is used to retrive or download the files from the internet
+
+curl https://raw.githubusercontent.com/iam-veeramalla/sandbox/main/log/dummylog01122022.log | grep TRACE
+-- Here curl "website" | grep type of error like trace, error, info and etc as present in log file
+
+To make get request to google or any of the application 
+=======================================================
+curl -X GET "end point or website link"
+
+Ex: curl -X GET https://api.publicapis.org/entries
+
+
+┌─[pavan@DESKTOP-FBB1C6S] - [~/Shell_Scripting_Abhi] - [2023-01-15 04:44:15]
+└─[130] <> curl -X GET https://api.publicapis.org/entries | awk -F" " '{print $1}'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  274k    0  274k    0     0  75810      0 --:--:--  0:00:03 --:--:-- 75790
+{"count":1425,"entries":[{"API":"AdoptAPet","Description":"Resource
+┌─[pavan@DESKTOP-FBB1C6S] - [~/Shell_Scripting_Abhi] - [2023-01-15 04:46:28]
+└─[0] <> curl -X GET https://api.publicapis.org/entries | awk -F" " '{print $1,2,3}'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  274k    0  274k    0     0   109k      0 --:--:--  0:00:02 --:--:--  109k
+{"count":1425,"entries":[{"API":"AdoptAPet","Description":"Resource 2 3
+
+Difference b/w curl and wget is
+=============================
+Curl == Will share the output, Directly without downloading the file
+wget == Will download the file and then we have use cat and grep to get the data
+
+Ex: WGET
+┌─[pavan@DESKTOP-FBB1C6S] - [~/Shell_Scripting_Abhi] - [2023-01-15 04:48:52]
+└─[0] <> ls
+dummylog01122022.log  first-shell-script.sh  nodeHealth.sh  pavan  sample-shell-script.sh  test.sh  test2.sh
+┌─[pavan@DESKTOP-FBB1C6S] - [~/Shell_Scripting_Abhi] - [2023-01-15 04:48:54]
+└─[0] <> cat dummylog01122022.log | grep ERROR
+03/22 08:53:38 ERROR  :......router_forward_getOI:         route handle:   7f5251c8
+03/22 08:53:38 ERROR  :.......mailslot_send: sending to (9.67.116.99:0)
+03/22 08:54:24 ERROR  :......router_forward_getOI:         out inf:   9.67.116.98
+03/22 08:54:53 ERROR  :..mailslot_sitter: process received signal SIGTERM
+
+==========================================================================
+
+find == 
+
+find / == Find all the files and folder in this machine
+find / -name pem
+Ex: sudo find / -name hosts
+Ex: sudo find / -name hostname
+
+How to go to root user
+=======================
+sudo su -   == This command will help to go to root user( suod su == Super or subsitive user do -- Switch user )
+logout === This is used to logout from any user or root user
+
+To check users
+===============
+cat /etc/passwd
+
+
+SINGALS === 
+
+
+Kill commmand
+=============
+kill -9 34324
+---------------
+Kill -9 2343 === Here kill is used to kill the process 
+		--    -9 instructs to kill
+		--    2343 is the pid
+
+When we execute this command their is signals that passing throught the linux
+When we press ctrl + c, Then is singals that linux system recevied
+
+				
+NOTE : If we type yes as the command then it will contiously type y untill we stop using ctrl + c
+
+Learn about Linux singals============
+--------------------------------
+From the internet
+
+trap
+=======
+trap == Is used to not to stop the process 
+Ex: if user press ctrl + c do stop it, instead show up a msg or send to email to owner 
+-- Traps the singals and performs the actions behalf of us or owner
+
+Ex: trap "echo dont use the ctrl+c" SIGINT
+To stop -- use logout
+
+Ex: trap "rm -rf " SIGINT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

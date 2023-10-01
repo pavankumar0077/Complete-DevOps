@@ -1,0 +1,44 @@
+CI/CD
+=========
+Continous Integration == Process set of tools or process that we follow before delivery the application or deploying the application.
+
+Continous Delivery == Is the process where you deploy your application and delivery the application to specific platform 
+
+Ex: App dev (personal laptop)  ---> Customer laptop
+Tested -- Scanned -- Reports -- deploy -- Customer will access it
+
+Unit testing
+============
+--> Dev's testing their own code 
+--> Testing own code with specific conditions
+
+Static code analysis
+===================
+Syntax check
+formatting check
+indentation check
+
+Ex: In an application if we are declared lot of variables but only using few then 
+wastage of memory is there, To reduce that we have to do static code analysis
+
+Code quality/Vulnerability
+========================
+Code quality testing any vulnerablity with new version 
+
+Automation testing
+=====================
+Functionality testing on end to end testing on application for example addition function is not implacing sub or mul function 
+
+Reports
+========
+Esstential 
+Reports of code quality and other stuff
+
+Deployment state
+================
+Deployment is available to the customer to access it
+
+
+
+
+

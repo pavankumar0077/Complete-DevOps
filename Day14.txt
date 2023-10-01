@@ -1,0 +1,26 @@
+Configuration Management
+=========================
+Puppet -- pull model
+	-- Master, Slave model
+	-- Master puppet server (Config ec2 as 	slaves )
+	-- We have write in puppet language
+
+
+Ansible -- push model (execute the ansible playbook) 
+	push to ec2
+	-- Agentless model	
+	-- Inventery file(Just ip or dns or 		             names of ther servers with Pwdless auth
+	-- Dynamic inventory (Auto detect -- INA 			file)
+	-- Windows & Linux (Very good support - 		module)
+	-- Redhat ansible
+	-- Ansible is simple (YAML manifest)	
+	-- We can write our own ansible modules 	(Ansible is written in python language) and 	we can share by using ansible galaxy
+	
+Problems Anisble in windows
+-------------------------------
+-- Windows support is not that great
+-- Debugging 
+-- Performance issues
+
+
+	

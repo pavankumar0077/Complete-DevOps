@@ -1,0 +1,63 @@
+Shell scripting -- Is a process of automate day to day activites or regular activies in your linux  compute 
+
+Info of any command
+=======================
+man ls
+man touch
+man cat
+
+We can also create the file directly using
+nano ( It creates and open the file )
+Ex: nano second-shell-script.sh
+
+Then why to touch 
+Be'coz touch is used in the automation
+
+Note : For every bash file, We have to write shabang
+#!/bin/bash   ** Madatoroy
+
+bash , dash , sh , rsh  === These are different executables of the  shell script
+
+#!/bin/sh --- Internally uses #!/bin/bash with the concept of linking But But .....
+
+--> Recent years ubuntu started using #!/bin/dash instead of #!/bin/dash
+
+**** Use #!/bin/bash  ******
+
+To Run a shell scripting 
+=====================
+sh first-shell-script.sh
+bash first-shell-script.sh
+./first-shell-script.sh
+
+After writing the scripting
+we have to give permissions to run the script ( Linux is secure )
+
+chmod === Grant permissions
+ch == change 
+mod == permission
+
+Ex: chmod first-shell-script.sh
+
+Grant permission for every one
+=============================
+Ex:  chmod 777 frist.sh
+
+4 == read
+2 == write
+1 == execute
+
+7 == means all read, write, and execute
+
+Ex: chmod 444 first.sh
+-- Read permission for root
+-- Read permssion for User
+-- Read persmission for group
+
+
+histroy 
+=========
+history == This command is used to get all the used commands
+
+
+

@@ -1,0 +1,100 @@
+Putty -- terminal
+MobaXterm -- terminal  (1st)
+NOmachine -- terminal  (2nd)
+
+3 ways to connect with AWS
+1) AWS console 
+2) Using terminal
+3) Using CloudFormation ( Infra structure as code)
+4) Script automation ( Using aws api )
+
+
+To start the instance using terminal
+ssh @3.94.213.245
+
+Use permissions
+ssh -i test1.pem ubuntu@3.94.213.245
+
+If we get any error like bad permissions then use
+chmod 600 ssh -i test1.pem ubuntu@3.94.213.245
+
+
+3 ways to connect with aws
+=========================
+
+1) AWS CLI : https://aws.amazon.com/cli/
+-- Go to profile in aws right side top corner
+-- Security 
+	-- Access Keys
+	
+
+In the terminal
+type : aws configure
+-- access key
+-- secret access key
+-- region
+-- format
+
+To view all the buckets
+----------------------------
+aws s3 ls
+-- In aws if we have any s3 bucket it will show here
+
+To create s3 bucket from aws cli
+---------------------------------------
+aws s3 mb s3://pavan2797 --region us-west-1
+
+Here mb is used to make bucket
+-- pavan2797 is bucket name
+-- region -- us-west-1
+
+To remove s3 bucket
+=====================
+aws s3 rb s3://bucket-name --force  
+Ex : aws s3 rb s3://pavan2797 --force
+
+To create EC2
+==============
+https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2-instances.html
+
+Docs
+========
+https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2-instances.html
+
+
+2nd way to create aws instances
+================================
+https://github.com/awslabs/aws-cloudformation-templates
+
+Using aws cloud formation templates
+-------------------------------------------
+-- It is another way to talk (connect ) with aws api 
+
+How to use this
+==================
+-- On aws console 
+	-- Go to CFT ( CloudFormation )
+	-- Create stack ( To create our own 	template)
+	-- and provide details and submit
+
+
+3rd way to connect with aws instances
+====================================
+Using script automation
+======================
+Using aws api we have to write shell script or python script for automation
+
+-- Python as support to boto3 
+
+Docs
+========
+https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+
+https://gist.github.com/mda590/679aba60ca03699d5b12a32314debdc0
+
+
+
+
+
+
+

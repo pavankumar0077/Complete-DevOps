@@ -1,0 +1,21 @@
+To find which service running on which port
+Ex: Jenkins
+
+ps -ef | grep jenkins 
+------------------------
+Will show on which port jenkins is running 
+
+
+Befault AWS will bot allow all the port to run like allowing the traffic from any port is not allowed 
+Instance details -- Security -- Security groups -- Edit inbound rules 
+---> Add rule
+-- Customemr TCP port range anywhere 
+
+IN JENKINS WE HAVE TO FOLLOW NEW APPROACH THAT IS 
+Docker as agents
+
+Add docker pipeline plugin and use docker when their is requirement
+-- Cost saving
+-- No need to change dependencies
+-- images are available in docker hub
+

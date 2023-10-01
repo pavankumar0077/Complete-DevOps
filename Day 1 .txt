@@ -1,0 +1,21 @@
+What is Devops ?
+
+DevOps -- Culture that improves the Org'n delivery 
+-- DevOps is a process of increasing the ability to delivery the app'ns
+
+-- DevOps is a process of continously delivering in a quick process 
+
+-- DevOps is a proccess of improving your delivery  quicker by ensuring this is proper automation ensure that the quality in place and ensure that proper monitoring setup and proper testing 
+
+=================================================
+
+Why Devops ?
+
+-- 
+
+===========================
+
+How to introduce ?
+
+================================
+

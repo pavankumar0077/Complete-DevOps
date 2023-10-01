@@ -1,0 +1,57 @@
+Install Ansible
+===============
+-- sudo apt update
+-- sudo apt install ansible
+
+to check
+-- ansible --version
+
+Connect ssh of target instance
+===============================
+Ways to do that
+-------------------
+-- ssh-copy-id 172.31.59.89
+ssh and private id addresss
+Easy way, But sometime it doesn't have full permissions
+
+ssh-keygen 
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC3wYwzs/szZr39b3kuorfip8k0xSqY+eYjmMcvYrMqDTzVP1NX+aB60W+DVwAMwtl2W1LzpaTSWA6xZLgMLqWtpZwmRQFrY4S4UkE+uqSk/llggfiXKTxsFNWfdCF6wgrKdIVBfbl20PQSBFaVVtd1K0qIPLSaGP7IIW1rBQ2V2l9fC71q0sOXQSxluukqOxTKRE8dv/EPh8m+XKl0kg6OLsfvdDpeeCfQ+fjgZGMYEYcldt2JGxA5Tiy/XgcqCO7lqm7Li1BETw0wj17NrwQs1Bev84iEbs865cLYE9rdWV0P0XEefZMpoPLiBN44SAAgD2EDvPHC9o8pBrr/kNhAR0AIpwDX8tmlF05kEEdsjuf8NfHt+PGn4PDENps4zxSlta17uTsOShUdLeUu4zZnsw5V7rE3RlMxaXMDYOWUSfq5HAgiW3Jin2NxmOHgOhalfiOqUjx+S7n5UwsjIhxMYrUruk2elbngyiuWwmKkFlBqhNyMnIureZGx7zCMi0U= ubuntu@ip-172-31-35-94
+
+
+
+Steps to ansible with password less
+================================
+Create 2 servers 
+1. Unbuntu Ansible ( Server )
+2. Unbuntu ( Target )
+
+Do ssh keygen in both server and target machines
+---------------------------------------------------------
+for targer --- create keys -- ssh keygen
+and save in the notepad 
+copy the generated key
+from ansible server machine
+
+Next: Go to targert ( Unbuntu)  and open authrized keys
+.ssh folder
+and paste it
+
+
+Now go to target server details and find private ip
+next: give ssh @private id in ansible server
+
+--------------------------------------------------------------
+Note: Public ip of ansible server to Authorized keys of target server
+
+Any server same process
+--------------------------------------------------------------
+Inventary file: It is nothing but it stores IP's of target server
+============================
+Ansible adhoc commands
+============================
+==> ansible -i inventory 172.31.42.134 -- only for one server
+==> ansible -i inventory all -- all the server's in inventory files
+==> ansible -i inventory all -m "shell" -a "touch devopsclass"
+

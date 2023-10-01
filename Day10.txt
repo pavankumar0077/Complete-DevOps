@@ -1,0 +1,16 @@
+Git Branching Strategy
+========================
+Branch == It is sepration 
+
+Master
+Feature
+Release
+
+
+If you want to Delivery your code to customer then we create a Relase branch
+-- Why we use release branch why not master
+-- Be'coz master is kept for active development
+================================================
+Release == build == ship to customer
+Master == is kept for active development, It should be up to date
+Hot Fix branch == Quick fix, tested then moved to release and master branch both

@@ -1,0 +1,107 @@
+Terrraform == Provider or config file == Terrform provider --- Traget API
+Terraform == tracking the infrastructure
+
+Terraform lifecycle
+--------------------==
+Doc == https://www.terraform.io/
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
+1. Write  -- Write terraform config files (refer doc search for provider)
+2. Plan -- Actually see what the things happen like dry run test
+3. Apply -- Apply infrastruture 
+
+
+NOTE: First we need to authenticate with aws cli
+Before we run terraform scripts
+
+aws configure
+provide access key id and screct key 
+
+terraform init == iintilization
+terraform plan == Show's the details what is going to happen when applied == dry run
+terraform apply == Actual script will run and create the service in aws
+terraform destroy  == To delete the service or instance in aws 
+
+main.tf file 
+==============
+Where our terraform main instance or service creation code will there
+
+terraform.tfstate (NOTE: Imp file of any terraform file)
+================ 
+These file is automatically created when we execute main.tf file
+Terraform only understand the state file 
+It will track all the details 
+updaing this file 
+
+inputs.tf 
+=========
+
+variables.tf
+=============
+Create all the varibles in these file to get more readability
+
+outputs.tf file 
+---------------
+Which gives more details about the service or instance which are created by terraform
+like variable, urls, and other imp detials
+
+--> User may execute the script from various ways like from jenkins pipeline and etcc
+-- So to give more details about the instance we need to create outputs.tf file
+
+Note: We don't commit state file in the git repo's becoz of sensitive info is available even we can't merge from others becoz both are differenet
+
+Note: Only store in remote backends 
+--> Don't update the state file manually else it will currupted
+
+Dynamo DB
+===========
+Here in this example dynamo db is used for locking the terraform state file, once the amazon s3 is free and state is unlocked then terraform will give permissions to the user to do modifications
+
+Remote backends
+===============
+Remote storeage services like S3, azure storage contrainer
+and integrate with them using locking mechanism like in awz dynamo db 
+
+Terraform set up
+===================
+
+User/Devops engineer --> Jenkins/gitops/other cicd ---> Github/bitbucket/svn/others 							|
+							|
+						s3 bucket ----> Dynamo Db
+---> Aws/gcp/openstack/other
+
+
+
+FIND ALL RUNNING INSTANCES IN AWS EC2
+=============================================
+Sign in to the AWS Management Console. 
+On the navigation bar, choose Services. 
+Under Management & Governance, 
+choose Resource Groups & Tag Editor.
+
+Regions == all
+Resource types == AWS::EC2::Instance
+Click on Serach resouces
+
+ELK == Elastic Logshash Kibana
+ALK == Application Load balancer
+
+Terraform modules
+==================
+Reusable code 
+Write resuable components
+
+
+Problems with terrraform
+-----------------------------
+
+
+
+
+
+
+
+
+
+
+
