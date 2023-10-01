@@ -87,7 +87,8 @@ Create EKS cluster
 --
 - Recommened way to CREATE CLUSTER IS USING EKCTL CLI
 - COMMANDS ``` https://github.com/pavankumar0077/aws-devops-zero-to-hero/blob/main/day-22/installing-eks.md ```
-- Use this command to create cluster ``` eksctl create cluster --name demo-cluster --region us-east-1 --fargate ``` while creating if there are any errors. Please delete the CFT CloudFormation Stack and re-try
+- Use this command to create cluster ``` eksctl create cluster --name demo-cluster --region us-east-1 --fargate ``` while creating if there are any errors. Please delete the CFT CloudFormation Stack and re-try or use this command
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/5a5718a2-e588-4d01-bc3f-3e7961655780)
 - It create everything that we required like it will create public private subnet for us IN VPC. In the private subnet we place our applications -- All this things are taken care by ekstcl utility
 - OPEN ID CONNECTOR PROVIDER : For the cluster what we have created we can provide IDENTITY PROVIDERS LIKE Okta, KeyClock, LDAP
 - We can use IAM, But if you want to use any othe identity provider we can INTEGRATE with OpenID connect.
