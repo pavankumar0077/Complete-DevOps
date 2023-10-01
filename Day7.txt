@@ -11,8 +11,8 @@ DEVOPS ENGINEER OR AWS ADMIN
 -- Should make cost effecitiviness
 -- Tracking the resouce usage
 
-Access key :  AKIA3SGFCDRM52ZGNX6V
-Access key pwd : vlFHcwllWL+fWAYXkmghlOPvF+PqufV1lIiWTxZD
+Access key :  your-key
+Serect Access key : your-serect-access-key
 
 
 ============================================================================================
