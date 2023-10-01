@@ -44,7 +44,7 @@ WHY ANSIBLE ? BETTER THAN OTHERS
 PUPPET (p)
 ANISBLE (a) 
 1) Installing pkgs -- Devoops engieer using (a) write this ansible playbooks and the configurations to 10 EC2 instance **USING PUSH MODEL**
-2) (a) Useless AGENTNESS MODEL. Just give names of the server on inventory file. and password less auth enable
+2) (a) Uses AGENTNESS MODEL. Just give names of the server on inventory file. and password less auth enable
 3) Dynamic inventory -- ansible will update dynamically the inventory.
 4) IF any new server is created then ansible will configure it llike dynamically
 5) Ansible is easy with windows and linux very good modules to use windows server, linux server.
