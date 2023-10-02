@@ -238,8 +238,37 @@ REF LINK : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/res
 - Plan and apply again
 - ``` terraform apply -auto-approve ``` Use this command to auto approve after using terraform apply command
 - ``` terraform apply -lock=false ``` To not to lock the file
+- Check whether intances are up and running
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/51eecf7e-782b-49e9-b1f1-e7c504a97bfb)
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/88581834-b231-4c8e-a1ce-660a8b563833)
+
+
 
 Step 8 :  Crate LOAD BALANCER 
 REF LINK : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
+
+Step 9: Crate TARGET GROUP
+REF LINK : https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
+
+Step 10 : Attaching instances to the target groups
+
+Step 11:  Making a listener to listen to do certain action when lb access the target group
+- ``` terrafrom validate ``` to validate
+- ``` terraform fmt ``` to format the code
+- ``` terraform plan ``` to dry run
+- ``` terrafrom apply ``` to create the resouces
+
+Step 12: FINALLY OUR APPLICATION IS ACCESSABLE BY USING LOAD BALANCER
+-  ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/e9108283-b48b-4e75-93b0-7093980b1564)
+
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/8ef58155-2fa9-497d-a836-5a49f6d79533)
+
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/f31e6709-c334-4f6e-b313-4b1f46639410)
+
+- FROM LOAD BALANCER -- COPY DNS NAME AND CHECK WHETHER APPLICATION IS ACCESSABLE OR NOT
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/688ac297-fd66-49bc-b29c-dbcaecbe4447)
+
+- ``` terraform destroy -auto-approve ``` or ``` terrafrom destroy ``` -- TO DELETE THE ENTIRE INFRA WITH ONE COMMAND
+
 
 
