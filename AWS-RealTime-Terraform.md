@@ -2,6 +2,8 @@
 
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/99007b9b-407f-42be-824f-081d2488487e)
 
+CODE REF : https://github.com/pavankumar0077/aws-devops-zero-to-hero/tree/main/day-24
+
 Install Terraform
 --
 - https://developer.hashicorp.com/terraform/downloads
