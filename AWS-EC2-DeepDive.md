@@ -2,8 +2,6 @@
 
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/054bc5eb-5634-4bd5-b782-53e86c241c9e)
 
-![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/3c4ba0b9-acb3-4ec5-ab4b-2ca24090aa53)
-
 ### EC2 : Elastic Cloud Compute
 Compute : To provide a compute instance which includes cpu ram and disk (Virtual Server)
 Elastic : Scale up and scale down
