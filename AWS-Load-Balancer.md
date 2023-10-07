@@ -63,4 +63,30 @@ Ex: - Lets say we have a user we want to access the LINKEDIN website, User reque
   - ALB is a costly load balancer -- it will many additonal and advances features
   - IT can INTERCEPT the HTTP Request it can decide the LOAD BALANCING TECHNIQUE
   - ALB little bit slow because it is intercepting and providing the additional capabilites it is costly
-  - it is slow becuase the ALB is analysising your LAYER and then it is forwarding to the server there is A HOP in between or stoppage in between 
+  - it is slow becuase the ALB is analysising your LAYER and then it is forwarding to the server there is A HOP in between or stoppage in between
+
+
+## Network Load Balancer (NLB)
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/f16d7e45-04f1-48f1-8548-90db943e86c2)
+
+- It acts on LAYER 4 (Transport Layer)
+- A NLB and there are some applicaitons -- User sends request to the NLB, it can INTERCEPT http request it can not perform any INTERCEPTION and modification on LAYER 7 but when the request comes FROM LAYER 7 to LAYER 4
+- There NLB will play a certical role in Transport Layer
+- WHo requries NLB there are some Game Servers, Youtube, Streaming Platformss
+- At the transpor layer it transmit the data into small small packets and it ensures that the data is tramitted client to server without any latency, or loss of data.
+- NLB will ensure LOW LATENCY,  High Tranmission of data
+- It will decide and sends the request to the servers
+- It perform routing at the TCP/UCP packets not on HTTP packets
+- It creates STICKY sessions as well
+
+## GATEWAY LOAD BALANCER (GWLB)
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/4f63397c-f7c3-4ed6-871e-295025ef724e)
+
+- Gateway LB is useful when we are dealing with some kind of virtual applicances
+- VPC kind of application, firewall kind of application. In this type of applicaitons we will use GWLB
+- For firewall applicaiton if we front-face ALB instead of GWLB, the kind of traffic receives is specific that can not be handled by ALBor NLB thay does not provide security
+- GWLB provides security and it sends encrypted packets to the virtual applicanes which ALB AND NLB can't
+- ALB AND NLB are not situable
+
