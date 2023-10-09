@@ -32,4 +32,9 @@ User
 
 Reasons to mention about 3-tier archi and when not to mention
 --
-- Now many of the organizations are moving to SERVERLESS architecutre or KUBERNETTES architecture 
+- Now many of the organizations are moving to SERVERLESS architecutre or KUBERNETTES architecture
+- If job description required containers then explain or use EKS Architecture
+- If the JD requires knowledge of applications on EC2 instances then we can explain this 3 tier architecture model
+
+REF LINE 1: https://aws.plainenglish.io/building-your-first-kubernetes-application-with-aws-eks-bc2f1e84118
+REF LINK 2 : https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/deploy-a-sample-java-microservice-on-amazon-eks-and-expose-the-microservice-using-an-application-load-balancer.html
