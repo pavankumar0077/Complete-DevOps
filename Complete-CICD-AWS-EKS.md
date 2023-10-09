@@ -39,4 +39,13 @@ when{expression {params.action == 'create'}}
 @Library("my-shared-library", "abc-lib", "xyz-lib) _
 ```
 
-6) 
+6) We have to add the docker details, So for that we need to add String values and we can also give default values as well
+```
+ parameters {
+        choice(name: 'action', choices: 'create\ndelete', description: 'Choose create/Destroy')
+        string(name: 'ImageName', description: "name of the docker build", defaultvalue: "javaapp")
+        string(name: 'ImageTag', description: "name of the docker build", defaultvalue: "v1")
+        string(name: 'AppName', description: "name of the application", defaultvalue: "springboot")
+    }
+```
+7) 
