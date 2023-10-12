@@ -28,4 +28,7 @@
 28) How you connect with ec2 instance ?
 29) Difference between policies and roles in AWS
 30) How to you access S3 from EC2 instances ?
-31) 
+### =====================================================================
+1) What is I node in linux file system ?
+2) what is Prom QL in promethus ?
+3) How to define runnable service in user defined service named my service in linux env ?
