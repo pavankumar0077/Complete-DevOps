@@ -3,7 +3,7 @@
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/0f76b7d2-86f8-4c48-b998-7012de01fc24)
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/ff317c2a-56fd-488c-ae46-627c7b0f7cfc)
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/78a569bc-3260-4256-89e4-3db4cb83a5ba)
-
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/1ef3fe7c-d045-4fe1-a804-fb631355eddc)
 
 Step 1 - Preparation:
 --
