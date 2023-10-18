@@ -82,5 +82,18 @@ We can filter the serverity
 ```
 trivy image --severity HIGH,CRITICAL sonarqube
 ```
+Kubernetes yaml file scan
+--
+```
+trivy fs --security-checks vuln,config kubernetes-sample/
+```
+Here kubernetes-sample is folder where all the yaml files are available
+
+Save report as a json file
+--
+```
+trivy image -f json -o results.json sonarqube 
+```
+
 
 
