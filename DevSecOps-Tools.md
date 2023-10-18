@@ -95,5 +95,10 @@ Save report as a json file
 trivy image -f json -o results.json sonarqube 
 ```
 
+## "======================================================================"
+## "======================================================================"
 
-
+OWASP Dependency Checker
+--
+- It is tool which is used for scanning your source code for finding the publicly announced vulnerabilites may be present in your dependencies of the source coede.
+- It will generate a report on HTML or XML format.
