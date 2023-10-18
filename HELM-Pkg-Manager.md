@@ -19,3 +19,20 @@ your cluster, you can install that chart twice. Each one will have its own relea
 - With these concepts in mind, we can now explain Helm like this:
 Helm installs charts into Kubernetes, creating a new release for each installation. And to find new charts, you can search Helm
 chart repositories.
+
+## HELM Install the resources in specific order 
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/5a330153-04c8-4fa4-82f7-563863e6c4c2)
+
+![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/d4467649-5df5-466d-8211-23447c2b1f66)
+
+What is Helm CHart ?
+- A Helm chart is a package that contains all the necessary resources to deploy an application to a Kubernetes cluster. This includes YAML configuration files for deployments, services, secrets, and config maps that define the desired state of your application.
+
+REF LINKS
+--
+1) https://helm.sh/docs/helm/helm/
+2) https://github.com/Azure-Samples/helm-charts/tree/master/chart-source
+3) https://helm.sh/docs/topics/v2_v3_migration/
+4) https://helm.sh/docs/helm/helm_create/
+5) https://github.com/bregman-arie/devops-exercises/tree/master/topics/kubernetes#helm
+
