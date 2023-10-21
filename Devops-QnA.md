@@ -67,3 +67,32 @@
 
 - That so our mounted points are basically ending XDA volumes so when you put which volumes are filled up and go to that volume check for the highest utilization files and either flush it out or just check for any temporary files or if it could be because of some inodes so it might make a clear up some my nodes you fill up that space after doing that
 
+7) What do you understand by Linux kernel?
+- Linux kernel is something you can say, it's the heart of operating systems. It's something you can say whenever you are inputting something on a Linux system, so it is a kernel who interprets between us and like the player, you can say, whatever you are trying to do, get executed. 
+
+8) when we talk about a process and a daemon, what is the difference between both of them?
+- Process is something like it's a simple process, like which are, so let's consider some applications are running also. That's a one process, whichever in like whenever any application, there are a few processes which work in a bit calm. So that is something we call as a process. And daemon is something you can say, 
+I'm not sure on the exact part, but it's just something you can say, a group of processes which will get loaded while your OS gets started.
+
+9) Have you heard about LVM partition? Yeah, yeah. Okay, so how do you reduce or shrink the size of an LVM partition?
+- If you see in X, like original 7 and if we are using XFS file system, so I don't think there will be an option to reduce the LVM. You need to destroy the logical volume groups and then recreate it, but the resize2fs command, it will use for that.
+
+10) so we always have a root user in Linux Press, uh, I think, uh, "E," I think, uh, it's different on your console stand. Uh, we have to go, uh, the, uh, like a line which started with Linux exchange and then Rd dot track. We have to do, and then it will go to the, uh, you can say rescue mode over there. Uh, we have to, uh, like, uh, reset the root passwords.
+
+11)  let's see, uh, I have created a file in Linux. Okay, um, initial file, touch execute.sh.
+
+12) so I have just created the file. Put, uh, and this file starts my Tomcat. I have written everything whenever I'm trying to start it, it's not happening. Uh, what would be wrong over here? So when you say "sh," it should have execute permission. ?
+-  First things, so, so first thing we can check, uh, by like LS or LL. You can see, you list down the files and see the permissions. And then, uh, after, if information is completely fine, then, uh, like, we can run the script against. And if it still is not working, then we check, we need to, uh, let's check the logs of prompt right away. It's not getting started.
+
+13) so if I want to give the execute access, uh, what is the number that I give from chmod? So it says we give seven, so it's four for read, two for write, and one for execute. Okay, great, great.
+
+14) what do we understand by grep command and how do we use it? Can you give an example?
+- Okay, grep is something you can say if you want to grab some pattern or something. If it is something that matches a pattern or something, then we use it. I can give an example like, let's consider we have a number of processes in our Linux systems, and we have to create the process which has Java. There is one pack, so what we can do is, ps -ef | grep -i then the pattern, whatever pattern you have to search. So it will just list down the processes which have that particular pattern.
+
+15) Let's say I have a server that is running in Linux. Okay, let's say Tomcat server. So I have started it, it's not starting, and not even going down. It's somewhere stuck in the middle. How do you figure out what to do and how will you do it? What would your next step?
+- Okay, so in such cases, then our first thing what we can do is, like, we can find out that particular process ID, and then we can kill that process and restart it. Okay, what is the command for killing it forcefully? to kill we use kill -9 Okay, and if I don't want to, I just want to kill it, not forcefully. Do we have any other number? I don't recall it currently, but yeah, we have.
+
+16) what do we understand by inode? Okay, 
+so whenever we create file systems, we assign inodes to it. So every file which is stored in that particular file system got unique numbers. Okay,
+
+17) there is something on a shadow password, right? What does it mean and how is it enabled passwords? 
