@@ -33,7 +33,7 @@
 2) what is Prom QL in promethus ?
 3) How to define runnable service in user defined service named my service in linux env ?
 
-### =====================================================================
+### ======================== LINUX ===================================
 1) what exactly is a Linux kernel
 - a Linux kernel it's mostly like this um itself it's a program I would say uh which basically controls all the hardware and the software and in between that it creates a bridge so Linux kernel is mostly responsible for all the system calls and all the hardware monitoring 
 -  And it connects all the all to the um ports and everything so basically Linux kernel interacts between your Hardware input to these software level import operating system it creates a bridge and it communicates within both.
