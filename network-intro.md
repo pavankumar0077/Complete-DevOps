@@ -290,6 +290,117 @@ this?
     nautils /openterminal
 ```
 
+## ================================= NETWORK ==========================
+
+1) LAN - LOCAL AREA network -- Connected to the network and each other (EX: HOME)
+2) IP -- specific location (logical address)
+3) Switch -- connects devices within same network in Local area network
+4) Router -- A router is a networking device that forwards data packages between "DIFFERENT" commputer networks from LAN to Outside internet
+5) SUBNET - Sub network defines your Local area network Range
+6) ANY network needs 3 thinngs -- IP, SUBNET, GATEWAY
+7) Gateway -- IP address of the ROUTER 
+8) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/f6d5b1de-4129-4bbf-b916-636b60863273)
+9) Wiki - Network address translation (NAT) is a method of remapping an
+IP address while they are in transit across a traffic routing device.
+10) fIREWALL - Set of passive rules to protect network from unauthorized access
+11) ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/150d10e0-c6b4-474a-9ca9-f872870cf117)
+12) DMZ -- If any request comes from adhoc devices it passes to router and it sends to DMZ
+13) a DMZ or demilitarized zone is a subnetwork that contains and exposes a DEVICE
+to an untrusted, network such as the Internet.
+14) Port Forwarding redirects a communication request from one address and port numbas
+combination to another while the packets are traversing a network gateway.
+such as a router or firewall
+
+## =================================== NETWORK TROUBLESHOOTING Command ==========================
+```
+1- ifconfig
+```
+IF we want to see where all the network interfaces are available ``` cd /etc/sysconfig/network-scripts/ ```
+ifdown and ifup is used to donw and up the network
+```
+2- ifup etho
+```
+ifdown lo (lo is look back)
+```
+3- ifdown etho
+4- ping 8.8.8.8
+```
+ping -c 5 8.8.8.8
+```
+5- traceroute 8.8.8.8
+```
+particular routes, gateway and all the hops
+```
+6- netstat
+```
+netstat -tunlp == to check open ports, routes, gateways 
+```
+7- dig www.google.com
+```
+We get CNAME, server info and etc
+```
+8- nslookup
+```
+nslookup www.google.com
+canonical name, name and address
+```
+9- route
+```
+route -n == gateway ip address
+```
+10- host (host -t mx ServerGyan.com)
+```
+it will find all associated ip with our domain
+```
+11- arp -e
+```
+arp -e === Hardware info
+```
+12- ethtool
+```
+It prints the info of interface of lan card
+```
+13- hostname
+```
+hostname -I
+```
+14- пmap
+```
+sudo install nmap -y
+ip -r 
+namep -A <ip-address> == From local machine we can check the remote server ip address like what are the ports are using there
+```
+15- ip
+```
+ip r -- ip adddress source and etc info
+```
+16- ss
+```
+socket status 
+ss -ant == open listening on this ip address, ports and etc
+```
+17- tracepath
+```
+tracepath 8.8.8.8 == how it is reaching the ip address all the steps
+```
+18- ipref
+```
+sudo apt install iperf
+iperf -c <particular-ip-address> 
+```
+19 tcpdump
+```
+tcpdump == all the traffic we are receving
+tcpdump -i eth0
+```
+20- telnet
+```
+sudo apt install telnet
+Connectivity check from one OS to other OS
+```
+```
+
+
 
 
 
