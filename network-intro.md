@@ -398,7 +398,6 @@ tcpdump -i eth0
 sudo apt install telnet
 Connectivity check from one OS to other OS
 ```
-```
 
 
 
