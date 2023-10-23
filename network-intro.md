@@ -10,6 +10,8 @@
 
 ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/478c45a7-502e-4e96-8ab3-287dd51d3e5a)
 
+## ===================== LINUX ====================== 
+
 1) Which files stores the user min UID, max UID, password expiration settings, password
 encryption methods methodsing used etc.?
 ```
@@ -176,5 +178,118 @@ monthly basis?
 
     rpm -qa
 ```
+24) How to create a local yum repository which would make use of the mounted linux ISO image under /media?
+
+25) Different ways that can be used to verify that a package got installed successfully via yum:
+```
+    echo $?
+
+    rpm -qa | grep <pkg-name>
+```
+26) How to view the installed date of a package (consider the package sg3_utils)?
+```
+    rpm -qi coreutils<pkg-name>
+    rpm -qi coreutils | grep less
+```
+27) How to check what files sytems are mounted and their read/write status ?
+```
+    cat /etc/fstab
+
+    read/write status
+    cat /etc/mtab
+```
+28) Where is grub.conf/grunb.cfg files stored in RHEL system?
+```
+    cd /boot/grub2/
+```
+29) How do you remount a file system read only on the fly(online) ?
+```
+    df -Th
+
+    cat /etc/mtab | grep /boot
+
+    now change to read only
+
+    mount -o remount,ro /boot/
+```
+30) Commmand used to convert ext2 file system to ext3
+```
+    df -Th
+
+    tune2fs -j /boot/
+```
+31) Find out list of acutal devices associated with a logical volume using LVS command
+```
+    lsblk
+
+    lvs -o +segtype,devices
+```
+32)  How to set "rw" permissions on file for a user and disable for other users except root us
+(exclusive permissions)?
+```
+    USE ACL - access control list
+
+    su - 9Hiils <user-name> to swtich
+
+    created a file text.txt
+
+    Give permission to another user to access the file text.txt where is there in other user
+
+    setfacl -m u:tech:rw /home/9Hiils/text/.txt --- Here tech is user-name
+
+    getfactl /home/9Hiils/text.txt -- To check permissions to who you have given access
+```
+33) Different fields in /etc/fstab
+```
+    cat /etc/fstab
+
+    device-name mount-point filesytem-type  dump-check sytem-check
+```
+34) How do you skip the initial fsck(file system check) on a file system while booting up?
+```
+    cat /etc/fstab
+
+    change 0 0
+```
+35)  How to list all the files with SUID (Set User ID) bit set under the top level root directory and
+ignore any errors/warnings in the process, and list the output in long list format?
+```
+    find / -type f -perm -4000 2>/dev/null | xargs ls -l ---- xargs are for long list
+```
+36) How to list all the files/folders with SUID/SGID/Sticky Bit (Set Group ID) bit set under the kop-
+level root directory and ignore any errors/warnings in the process, and list the output in long list
+format?
+```
+    find / -type f -perm -7000 2>/dev/null | xargs ls -l ---- xargs are for long list
+````
+37) What are the differences between hard & soft links in Linux file system ?
+
+38) I've installed the latest kernel on the system successfully, however, my server still bentsareen 0)
+the old kernel. How do you make the system to boot from the newly installed kernel?
+```
+    cat /boot/grub2/grub.cfg
+
+    default --- kernel -- we need to mention the kernel name
+```
+39) hOW TO find out the sytem harware details such as manufacture, prod name etc ?
+```
+    cat /proc/meminfo
+
+    cat /proc/cpuinfo
+
+    dmidecode  -- manufacture details
+
+    dmidecode -type system
+
+    dmidecode -type bios
+
+```
+40) The option "Open in Terminal" is missing when user right clicks on terminal in GUI. How to fix
+this?
+```
+    nautils /openterminal
+```
+
+
 
 
