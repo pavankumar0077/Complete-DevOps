@@ -32,4 +32,18 @@
 
 - WE CAN ADD CONDITIONS HERE LIKE, CODE COVERAGE, DUPLICATES LINES AND ETC.
 - we can create our own conditions as well.
-- 
+
+TEST THE APPLICATION USING JENINS
+--
+- install SONAR QUBE SCANNER & JAVA ECLIPSE PLUGIN
+- configure it
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/bdba6139-2aee-4496-873b-39e3e21493dc)
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/4e3db509-e906-49cc-9e18-6970d7bdf84a)
+- ![image](https://github.com/pavankumar0077/Complete-DevOps/assets/40380941/608431c3-8edd-4a2c-bede-a0ffe50fc29e)
+
+## REF LINK FOR DEPENDENCIES : ``` https://github.com/jaiswaladi246/Petclinic/blob/main/pom.xml ```
+
+## JACOCO
+- WE NEED TO ADDED DEPENDENCIES TO GENERATE JACOCO REPORTS
+- IT IS 3RD PARTY TOOLS WHICH GETS INTEGRATED WITH MAVEN AND IT GENERATES THE CODE COVERAGE REPORT
+- DEPENDING ON THAT ONY WE WILL BE ABLE TO SEE OUR CODE COVERAGE INSIGHTS IN OUR SONAR QUBE
