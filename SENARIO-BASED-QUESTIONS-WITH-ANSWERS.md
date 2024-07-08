@@ -2144,3 +2144,88 @@ Manual Cleanup: In some cases, you might need to manually delete the S3 bucket f
 
 By following these steps, you can selectively delete the S3 bucket using Terraform while keeping your EC2 instance and other resources intact. Always double-check the planned changes before applying them in a production environment.
 ```
+19. I have self hosted runner it was installed in ec2 instance, That self hosted runner is abc-app.git repo and i have another repo called xyz-app.git repo, Now i for abc-app.git i have downloaded and installed self hosted runner, and for xyz-app.git repo is also using same ec2 instance, now both the applications are in one ec2 instance and for abc-app.git i have downloded and installed self hosted, So for xyz-app.git is also in same repo, So my question is that runner which is installed for abc-app.git can also we used for other application or repo like xzy-app.git, If yes then explain me in detailed with example.
+
+```
+To answer your question: Yes, it is possible to use a self-hosted runner installed for one repository (abc-app.git) for another repository (xyz-app.git) as well, provided they are in the same GitHub organization or user account. However, there are some considerations and steps to follow. Let me explain in detail:
+
+Runner Scope:
+When you set up a self-hosted runner, you can configure it at different levels:
+
+
+Repository level
+Organization level
+Enterprise level
+
+
+Sharing a Runner:
+If you want to use the same runner for multiple repositories, you should set it up at the organization level rather than the repository level.
+Steps to Share a Runner:
+
+a. Remove the existing repository-level runner:
+First, you need to remove the runner from the abc-app.git repository. Go to the repository settings, then to "Actions" > "Runners" and remove the existing runner.
+b. Add the runner at the organization level:
+
+Go to your GitHub organization's settings.
+Navigate to "Actions" > "Runners".
+Click on "New runner" and follow the installation instructions.
+When you run the configuration script, it will ask you to choose the scope. Select the organization-level scope.
+
+c. Configure runner groups (optional):
+You can create runner groups to manage access to the shared runner.
+
+Using the Shared Runner:
+
+Once the runner is set up at the organization level, you can use it in both abc-app.git and xyz-app.git repositories.
+
+Workflow Configuration:
+
+In your GitHub Actions workflow files (.github/workflows/*.yml) for both repositories, you can specify the use of the self-hosted runner like this:
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      # Your job steps here
+
+Example Scenario:
+
+Let's say your organization is called "myorg" and you have two repositories: myorg/abc-app and myorg/xyz-app.
+
+You've set up a self-hosted runner at the organization level.
+In abc-app's workflow file (.github/workflows/build.yml):
+
+name: Build ABC App
+on: [push]
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build ABC App
+        run: |
+          # Build commands for ABC app
+
+In xyz-app's workflow file (.github/workflows/build.yml):
+
+name: Build XYZ App
+on: [push]
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build XYZ App
+        run: |
+          # Build commands for XYZ app
+Both of these workflows will now use the same self-hosted runner in your EC2 instance.
+
+Considerations:
+
+
+Ensure your EC2 instance has enough resources to handle builds from both repositories.
+Be mindful of security implications when sharing runners across repositories.
+You may need to install different dependencies for each project on the EC2 instance.
+
+By following these steps and considerations, you can effectively use a single self-hosted runner for multiple repositories in your GitHub organization.
+Would you like me to elaborate on any specific part of this process?
+```
