@@ -2644,7 +2644,7 @@ Step 2: Initial Assessment
 
 Run a comprehensive Terraform plan across all regions:
 
-bashfor region in us-east-1 eu-west-1 ap-southeast-1; do
+for region in us-east-1 eu-west-1 ap-southeast-1; do
     export AWS_DEFAULT_REGION=$region
     terraform workspace select $region
     terraform plan -out=plan_$region.tfplan
@@ -2701,20 +2701,20 @@ Step 5: Immediate Mitigation
 
 Temporarily restrict access to the affected security groups:
 
-bashaws ec2 revoke-security-group-ingress --group-id sg-1234567890abcdef0 --protocol tcp --port 22 --cidr 203.0.113.0/24
+aws ec2 revoke-security-group-ingress --group-id sg-1234567890abcdef0 --protocol tcp --port 22 --cidr 203.0.113.0/24
 
 Re-enable communication with the caching layer:
 
-bashaws ec2 authorize-security-group-egress --group-id sg-1234567890abcdef0 --protocol tcp --port 6379 --cidr 10.1.0.0/16
+aws ec2 authorize-security-group-egress --group-id sg-1234567890abcdef0 --protocol tcp --port 6379 --cidr 10.1.0.0/16
 Step 6: Root Cause Analysis
 
 Review AWS CloudTrail logs to identify who made the changes and when:
 
-bashaws cloudtrail lookup-events --lookup-attributes AttributeKey=ResourceName,AttributeValue=sg-1234567890abcdef0
+aws cloudtrail lookup-events --lookup-attributes AttributeKey=ResourceName,AttributeValue=sg-1234567890abcdef0
 
 Analyze Terraform state to determine when the drift occurred:
 
-bashterraform show -json | jq '.values.root_module.resources[] | select(.type == "aws_security_group" and .name == "app_server_sg")'
+terraform show -json | jq '.values.root_module.resources[] | select(.type == "aws_security_group" and .name == "app_server_sg")'
 
 Interview the junior DevOps engineer to understand the context of the changes.
 
@@ -2780,7 +2780,7 @@ resource "aws_iam_policy" "restrict_sg_modifications" {
 
 Set up automated drift detection:
 
-bash#!/bin/bash
+#!/bin/
 # drift_detection.sh
 for region in us-east-1 eu-west-1 ap-southeast-1; do
     export AWS_DEFAULT_REGION=$region
@@ -2962,7 +2962,7 @@ Step 9: Continuous Improvement
 
 Schedule regular infrastructure audits:
 
-bash#!/bin/bash
+#!/bin/
 # infra_audit.sh
 terraform show -json | jq '.values.root_module.resources[] | {resource_type: .type, resource_name: .name, last_modified: .values.timeouts.update}' > infra_inventory.json
 aws configservice start-configuration-recorder
@@ -3679,4 +3679,88 @@ Visibility: Failed attempts are logged, providing insight into problematic areas
 Customization: Retry counts and timeout durations can be adjusted based on the specific needs of each stage.
 
 Remember to adjust the timeout durations and retry counts based on your specific project needs and infrastructure capabilities. Also, while retries can help overcome transient issues, it's important to investigate and address recurring problems to improve the overall stability of your pipeline.
+```
+28. Let's say for example there is a team who is developing on a payments and integration services and different things for the ecom application the thing is that there is a developer who is developing the application and unfortunately he deleted the branch by mistake and we want to restore that branch for version control we are using git in real time scenario how we could handle this situation with an example.
+
+```
+Certainly. Let's walk through this scenario step-by-step, illustrating how to recover a deleted branch in Git. This situation is quite common in real-world development environments, especially with large teams working on critical systems like payment and integration services for an e-commerce application.
+Scenario:
+A developer named Alice is working on a new feature branch called feature/payment-gateway-integration for implementing a new payment gateway in your e-commerce application. Unfortunately, while trying to clean up some old branches, she accidentally deletes this important branch that contains two weeks of work.
+Step 1: Remain Calm and Assess the Situation
+First, it's important not to panic. Git is designed with data integrity in mind, and it's often possible to recover seemingly lost work.
+Step 2: Check if the Branch Still Exists Remotely
+If the branch was pushed to the remote repository before being deleted locally, recovery is straightforward:
+git fetch origin
+git checkout -b feature/payment-gateway-integration origin/feature/payment-gateway-integration
+If this doesn't work, it means the branch was either never pushed or was also deleted from the remote. Move to the next step.
+Step 3: Use Git Reflog to Find the Lost Commit
+Git keeps a record of all ref updates in the reflog. We can use this to find the SHA of the last commit on the deleted branch:
+git reflog
+This will show a list of all recent actions. Look for the last commit on the deleted branch. It might look something like this:
+ab12345 HEAD@{2}: commit: Implement PayPal integration
+bc23456 HEAD@{3}: commit: Add payment gateway interface
+...
+Step 4: Recreate the Branch
+Once you've identified the SHA of the last commit on the deleted branch, you can recreate the branch:
+git checkout -b feature/payment-gateway-integration ab12345
+Replace ab12345 with the actual SHA you found in the reflog.
+Step 5: Verify the Recovered Branch
+Now, verify that the branch contains the expected work:
+git log
+git diff main
+Step 6: Push the Recovered Branch
+If everything looks correct, push the recovered branch to the remote repository:
+git push -u origin feature/payment-gateway-integration
+Step 7: Implement Preventive Measures
+To prevent this from happening in the future:
+
+Use protected branches for important branches like main, develop, and long-running feature branches.
+Implement a Git hooks system. For example, create a pre-delete hook:
+
+#!/bin/sh
+# .git/hooks/pre-delete
+
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+if [ "$branch_name" = "feature/payment-gateway-integration" ]; then
+    echo "Cannot delete protected branch: $branch_name"
+    exit 1
+fi
+
+Use a Git management tool like GitLab or GitHub that provides branch protection features.
+Conduct a team training session on Git best practices and recovery procedures.
+
+Step 8: Document the Incident
+Create a post-mortem document detailing:
+
+What happened
+How it was resolved
+What measures were put in place to prevent future occurrences
+
+This serves as a learning opportunity for the entire team and helps in handling similar situations in the future.
+Real-world Complexity:
+In a real e-commerce environment, this situation could be more complex. For instance:
+
+The deleted branch might have contained sensitive payment gateway API keys or secrets. In this case, you'd need to:
+
+Immediately revoke and regenerate all affected keys and secrets.
+Update the recovered code with the new keys.
+Conduct a security audit to ensure no unauthorized access occurred.
+
+
+The deletion might have happened just before a crucial demo or deployment. You'd need to:
+
+Quickly recover the branch as described above.
+Run all CI/CD pipelines to ensure the recovered code still passes all tests and security checks.
+Have a backup presenter ready for the demo while the primary developer verifies the recovered code.
+
+
+If the branch was central to a major feature, you might need to:
+
+Inform stakeholders about the temporary setback.
+Adjust sprint goals or deadlines if necessary.
+Consider pair programming or increased code reviews to catch up on lost time.
+
+
+
+By following these steps and considering these real-world complexities, you can effectively recover from an accidentally deleted branch and improve your team's Git practices to prevent future incidents.
 ```
