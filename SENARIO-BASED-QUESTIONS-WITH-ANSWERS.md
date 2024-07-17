@@ -547,7 +547,7 @@ This is the most common and recommended method.
 Store credentials in Jenkins' built-in credentials store.
 Access them in your pipeline using the credentials() function.
 
-groovypipeline {
+pipeline {
   agent any
   environment {
     DB_CREDS = credentials('my-db-credentials')
@@ -568,7 +568,7 @@ Set sensitive data as environment variables in Jenkins.
 Configure them in "Manage Jenkins" > "Configure System" > "Global properties".
 Access in pipeline:
 
-groovypipeline {
+pipeline {
   agent any
   stages {
     stage('Example') {
@@ -586,7 +586,7 @@ Install the HashiCorp Vault Plugin.
 Configure Vault server details in Jenkins.
 Use in pipeline:
 
-groovypipeline {
+pipeline {
   agent any
   stages {
     stage('Example') {
@@ -605,7 +605,7 @@ For AWS-specific secrets.
 Use AWS Secrets Manager to store secrets.
 Use AWS SDK in your pipeline to retrieve secrets:
 
-groovypipeline {
+pipeline {
   agent any
   stages {
     stage('Example') {
@@ -627,7 +627,7 @@ Install the Config File Provider plugin.
 Create a config file in Jenkins with your secrets.
 Use in pipeline:
 
-groovypipeline {
+pipeline {
   agent any
   stages {
     stage('Example') {
@@ -647,7 +647,7 @@ Encrypt your secrets file.
 Store the encrypted file in your repository.
 Decrypt in your pipeline:
 
-groovypipeline {
+pipeline {
   agent any
   stages {
     stage('Decrypt') {
@@ -3515,6 +3515,168 @@ resource "aws_autoscaling_policy" "predictive_scaling_policy" {
     max_capacity_buffer          = 10
   }
 }
-By implementing these strategies, your e-commerce application will be able to dynamically scale in response to unpredictable traffic patterns. The combination of multiple scaling policies, custom metrics, and predictive scaling provides a robust solution for handling unexpected spikes in traffic.
+By implementing these strategies, your e-commerce application will be able to scale in response to unpredictable traffic patterns dynamically. The combination of multiple scaling policies, custom metrics, and predictive scaling provides a robust solution for handling unexpected spikes in traffic.
 Remember to monitor your application closely after implementation, analyze the scaling patterns, and adjust your policies as needed. Also, consider implementing a robust logging and monitoring solution (e.g., AWS CloudWatch Logs, AWS X-Ray) to help you understand your application's behavior under different load conditions.
+```
+27. Let's say for example we have a Jenkins pipeline and we have a lot of different stages like from the get checkout to deployment to the kubernetes cluster so what happens is like in between each stage there was something happened like and we got a build failure so in Jenkins we have an option like retries after the build fail we can set the time out so I need to know how it will be set with real time example scenario based.
+
+```
+Certainly! I'll explain how to set up retries and timeouts in a Jenkins pipeline using a real-time scenario with a multi-stage pipeline for a web application deployment to a Kubernetes cluster. I'll provide a step-by-step example of how to implement retries and timeouts for different stages.
+Scenario:
+You're working on a web application that needs to be built, tested, and deployed to a Kubernetes cluster. The Jenkins pipeline includes stages for checkout, build, test, Docker image creation, pushing to a registry, and deployment to Kubernetes.
+Here's a sample Jenkinsfile with retries and timeouts implemented:
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_REGISTRY = "your-registry.azurecr.io"
+        DOCKER_IMAGE_NAME = "your-web-app"
+        DOCKER_IMAGE_TAG = "${BUILD_NUMBER}"
+        KUBE_CONFIG = credentials('kubernetes-config')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    retry(3) {
+                        checkout scm
+                    }
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                timeout(time: 10, unit: 'MINUTES') {
+                    retry(2) {
+                        sh 'npm install'
+                        sh 'npm run build'
+                    }
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                timeout(time: 15, unit: 'MINUTES') {
+                    retry(3) {
+                        sh 'npm test'
+                    }
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                timeout(time: 10, unit: 'MINUTES') {
+                    retry(2) {
+                        sh "docker build -t ${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ."
+                    }
+                }
+            }
+        }
+
+        stage('Push to Registry') {
+            steps {
+                timeout(time: 10, unit: 'MINUTES') {
+                    retry(3) {
+                        withCredentials([usernamePassword(credentialsId: 'docker-registry-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                            sh "echo ${DOCKER_PASSWORD} | docker login ${DOCKER_REGISTRY} -u ${DOCKER_USERNAME} --password-stdin"
+                            sh "docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                timeout(time: 15, unit: 'MINUTES') {
+                    retry(3) {
+                        withCredentials([file(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
+                            sh "kubectl --kubeconfig=${KUBECONFIG} set image deployment/your-deployment ${DOCKER_IMAGE_NAME}=${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                            sh "kubectl --kubeconfig=${KUBECONFIG} rollout status deployment/your-deployment"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo 'The pipeline failed :('
+            // Add any notification or cleanup steps here
+        }
+        success {
+            echo 'The pipeline succeeded!'
+            // Add any notification or cleanup steps here
+        }
+    }
+}
+Let's break down the retry and timeout implementations for each stage:
+
+Checkout Stage:
+
+Timeout: 5 minutes
+Retries: 3 times
+This allows for network issues or temporary SCM server problems.
+
+
+Build Stage:
+
+Timeout: 10 minutes
+Retries: 2 times
+Gives enough time for npm to install dependencies and build the project, with a retry in case of network issues.
+
+
+Test Stage:
+
+Timeout: 15 minutes
+Retries: 3 times
+Allows for longer-running tests and accounts for potential flaky tests.
+
+
+Build Docker Image Stage:
+
+Timeout: 10 minutes
+Retries: 2 times
+Provides time for Docker to build the image and retries in case of temporary issues.
+
+
+Push to Registry Stage:
+
+Timeout: 10 minutes
+Retries: 3 times
+Accounts for potential network issues when pushing to the Docker registry.
+
+
+Deploy to Kubernetes Stage:
+
+Timeout: 15 minutes
+Retries: 3 times
+Allows time for Kubernetes to update the deployment and verify the rollout, with retries for potential cluster issues.
+
+
+
+Real-time Scenario:
+Let's say during a deployment, the following occurs:
+
+The Checkout stage succeeds on the first try.
+The Build stage fails due to a temporary npm registry outage. It retries after a few seconds and succeeds on the second attempt.
+The Test stage runs but a flaky test causes it to fail. It automatically retries and passes on the second attempt.
+The Build Docker Image stage succeeds on the first try.
+The Push to Registry stage fails due to a network glitch. It retries and succeeds on the second attempt.
+The Deploy to Kubernetes stage initially fails because the cluster is temporarily unresponsive. It retries after a few seconds and succeeds on the second attempt.
+
+In this scenario, without the retry mechanism, the pipeline would have failed at the Build stage. With retries implemented, it's able to overcome temporary issues and complete successfully.
+Benefits of this approach:
+
+Resilience: The pipeline can handle temporary failures, improving overall reliability.
+Time Management: Timeouts ensure that stages don't hang indefinitely, allowing for better resource management.
+Visibility: Failed attempts are logged, providing insight into problematic areas of the pipeline.
+Customization: Retry counts and timeout durations can be adjusted based on the specific needs of each stage.
+
+Remember to adjust the timeout durations and retry counts based on your specific project needs and infrastructure capabilities. Also, while retries can help overcome transient issues, it's important to investigate and address recurring problems to improve the overall stability of your pipeline.
 ```
