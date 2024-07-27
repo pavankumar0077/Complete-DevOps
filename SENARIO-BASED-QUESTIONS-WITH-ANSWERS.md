@@ -1,4 +1,4 @@
-
+<!--
 ## NOTE : 1 TO 4 QUESTIONS ARE CONTINUE RELATED QUESTIONS 
 1. There is a pod running in the kubernetes cluster, Now i want to add a service to that running pod, How can we do that ? 
 
@@ -4418,3 +4418,4 @@ AWS Managed Services: Provides tight integration with AWS services and can be ea
 
 Choose the one that best fits your team's skills and existing infrastructure. Remember to implement proper IAM roles and permissions for each service to maintain security throughout your CI/CD pipeline.
 ```
+-->
