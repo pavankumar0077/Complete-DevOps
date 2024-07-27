@@ -3765,6 +3765,7 @@ Consider pair programming or increased code reviews to catch up on lost time.
 By following these steps and considering these real-world complexities, you can effectively recover from an accidentally deleted branch and improve your team's Git practices to prevent future incidents.
 ```
 29. **Terraform Guard (TF Guard) in Terraform**
+```
 TF Guard, also known as Terraform Sentinel, is a policy-as-code framework integrated with Terraform Enterprise and Terraform Cloud. It allows organizations to define and enforce policies for Terraform runs.
 
 Key Concepts and Features
@@ -4054,3 +4055,4 @@ Ensures cost control
 Standardizes resource configurations across your organization
 
 This real-time policy enforcement helps catch issues early in the development process, reducing the risk of non-compliant infrastructure being deployed to production environments.
+```
