@@ -15,6 +15,8 @@
 
 Vpc - Subnet
 --
+![image](https://github.com/user-attachments/assets/1c11da4e-b9ef-4de0-99d2-d55b9ab713b5)
+
 - AWS reserves 5 IP addresses (first 4 & last 1) in each subnet
 - These 5 IP addresses are not available for use and can't be assigned to an
 EC2 instance
