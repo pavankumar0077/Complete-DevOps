@@ -342,3 +342,72 @@ NACL DEMO
 - Allow any traffic out of the MY SUBNET
 - ![image](https://github.com/user-attachments/assets/d16822df-23c6-4683-83e6-947946b4d43c)
 
+VPC  Peering
+==
+![image](https://github.com/user-attachments/assets/838ff6db-fdbd-4e07-badd-429fe37f8e0e)
+
+![image](https://github.com/user-attachments/assets/7f7b8894-d714-45e6-be43-e282e188d0c0)
+
+- Privately connect two VPCs using AWS'
+network. ( PRIVATE SUBNET )
+- Make them behave as if they were in the
+same network
+- Must not have overlapping CIDRs
+- VPC Peering connection is NOT transitive
+(must be established for each VPC that
+need to communicate with one another)
+- You must update route tables in each VPCs
+subnets to ensure EC2 instances can
+communicate with each other.
+
+![image](https://github.com/user-attachments/assets/f0d1ca92-2889-4fb5-91c1-6482215c84b5)
+
+Demo
+--
+Step 1 : Peering connection
+-
+- Now we are connecting from ProdVpc to Default VPC
+- ![image](https://github.com/user-attachments/assets/8b9f2e61-9ef2-4dd7-8267-99e400ca074f)
+- CIDR range is not overlapping
+- ![image](https://github.com/user-attachments/assets/892a3dd8-2cec-4faa-8228-c15607a3114c)
+- We need to accept the peering connection, For now the connection is in same account we can accept here it self, if it is differenet aws account we need to accept in the differenet aws account.
+- ![image](https://github.com/user-attachments/assets/8f537334-a0ab-46af-957b-52b188bb7614)
+- ![image](https://github.com/user-attachments/assets/38ca694b-d432-4cc9-bc16-8623000f9a8a)
+
+Step 2 : Modify route tables
+-
+- ![image](https://github.com/user-attachments/assets/b3e66c68-8f8c-4c65-b2cf-6a4be01a5343)
+- We need to update the route tables of both public instance bastion host and private instance server as well 
+- ![image](https://github.com/user-attachments/assets/c2cfd9ff-56e1-41ea-b18d-91d03a5245c4)
+- We have done routes modification in the PROD-VPC as we are Requester (PROD=VPC)
+- Now we need do the same in the DEFAULT VPC
+- ![image](https://github.com/user-attachments/assets/e0c7c88a-a5e1-4188-97e3-3ca94616e22f)
+- WE HAVE CREATED PEER CONNECTION FROM PROD-VPC and Accepted IN THE DEFAULT VPC.
+- Now if we create EC2 instance or other services in that network they can communicate.
+
+
+Types of Endpoints
+--
+- IF we have an EC2 instance which wants to access a S3 service, the instance is in Private subnet
+- If the instance is in public subnet it can be able to access the s3 service, That is the only way, bec'coz we can not deploy the s3 in your vpc, it is not possible.
+- In case of rds and other managed services, but in case of serverless services like s3 it is not possible to deploy in the same subnet
+- The s3 must go to the public internet, When you go through the public internet WE HAVE FACE SOME DATA TRANSFER CHARGES
+- IS THEIR ANY WAY TO ACCESS S3 OR DYNAMO DB from the private instance yes IT IS POSSIBLE WITH THE END POINTS.
+
+![image](https://github.com/user-attachments/assets/fcee18b8-46c8-4b43-91dc-1f1b63a822c0)
+
+•
+### Interface Endpoints (powered by PrivateLink)
+- Provisions an ENI (private IP address) as an entry
+point (must attach a Security Group)
+- Supports most AWS services
+- $ per hour + $ per GB of data processed
+- It costs more, we can access using private network
+- 
+### Gateway Endpoints
+- Provisions a gateway and must be used as a
+target in a route table (does not use security
+groups)
+- Supports both S3 and DynamoDB
+- Free
+
