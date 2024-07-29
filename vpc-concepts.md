@@ -411,3 +411,99 @@ groups)
 - Supports both S3 and DynamoDB
 - Free
 
+Lambda In VPC accessing DynamoDB
+--
+![image](https://github.com/user-attachments/assets/f4d2e2b5-2d8b-4c33-9b9d-13f6b5155f73)
+
+- DynamoDB is a
+public service
+from AWS
+Option I: Access from the public
+internet
+- Because Lambda is in a VPC, it
+needs a NAT Gateway in a public
+subnet and an internet gateway
+- Option 2 (better & free): Access
+from the private VPC network
+• Deploy a VPC Gateway endpoint
+for DynamoDB
+- Change the Route Tables.
+
+VPC Flow Logs
+--
+![image](https://github.com/user-attachments/assets/16b3c8d7-5c0a-4175-9333-bea18b3115c3)
+
+- Capture information about IP traffic going into your interfaces:
+- VPC Flow Logs
+- Subnet Flow Logs
+- Elastic Network Interface (ENI) Flow Logs
+- Helps to monitor & troubleshoot connectivity issues
+- Flow logs data can go to S3 / CloudWatch Logs
+- Captures network information from AWS managed interfaces too: ELB,
+RDS, ElastiCache, Redshift, WorkSpaces, NATGW, Transit Gateway...
+- Logs for your network
+- ENI flow logs, Helps to monitor and troubleshoot connectivity issues. For example where is VPC connection for VPC -A AND VPC - B peering connection, For some reason you are seeing that some kind of data loss id happening while transferring from vpc-A and vpc-B then we can inspect VPC flow logs that are comming into your Subnet in your VPC-B.
+- You can check the source address and destination address is the right data is comminf from the correct source or not, Sometimes hacker may come in between and manipulate the data.
+- We can see the logs in clouodwatch logs and run quires too.
+
+Vpc Flow logs syntax
+--
+
+![image](https://github.com/user-attachments/assets/856faff2-361d-4fec-84ce-304f1cdeb108)
+
+- srcadar & stadar - help identify problematic IP
+- sport & dstport - help identity problematic ports
+- Action - success or failure of the request due to Security Group / NACL
+- Can be used for analytics on usage patterns, or malicious behavior
+- Query VPC flow logs using Athena on S3 or CloudWatch Logs Insights
+- Flow Logs examples: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs-records-examples.html
+- We and even create dashboard as well
+### NOTE: BY USING ATHENA WE CAN DIRECTLY QUERY USING S3 
+
+![image](https://github.com/user-attachments/assets/f8d4ba37-72ee-4bf0-b187-6047ee6a51ac)
+
+VPC flow logs - Architectures
+--
+![image](https://github.com/user-attachments/assets/501b9edd-d924-4ea3-a6d3-177bc508634c)
+- WE CAN RUN SQL QURIES USING AMAZON ATHENA.
+- AMAZON QUICKSIGHT (BI TOOL) used to create DASHBOARD
+
+AWS Site-to-Site VPN
+--
+![image](https://github.com/user-attachments/assets/8ab50c98-33e5-4a53-8cee-c9c581a388d7)
+- In site-to-site VPN we have VPN Gateway - If you want to connect with another network which is outside of the aws network then we must have a VPN Gateway 
+- On the other side like Customer side or the Co-orporate data center you must have CUSTOMER GATEWAY so these two are in place
+- VPN Gateway and the Customer Gateway then we can create a Site to Site VPN connection
+- VPN connection is nothing but it will create a tunnel and using that tunnel you can securely transfer the data through the tunnel but obviously it will be over the public internet.
+- If you want to communicate with one VPC to another VPC like Two VPC's which are on the AWS Cloud even though there are different accounts you can create a peering connection btw them, But you cannot peer a corporate data center with your particular VPC, - You have to create Site-to-Site connection or the Direct connection.
+
+Direct Connect (DX)
+==
+- Provides a dedicated private connection from a remote network to your VPC
+- Dedicated connection must be setup between your DC and AWS Direct
+Connect locations
+- You need to setup a Virtual Private Gateway on your VPC
+- Access public resources (S3) and private (EC2) on same connection
+- Use Cases:
+- Increase bandwidth throughput - working with large data sets - lower cost
+- More consistent network experience - applications using real-time data feeds
+- Hybrid Environments (on prem + cloud)
+- Supports both IPv4 and IPv6
+- Fast and expensive, It is like optical connection
+
+Direct Connect - Connection Types
+--
+- Dedicated Connections: | Gbps, 10 Gbps and) 100 Gbps capacity
+- Physical ethernet port dedicated to a customer
+Request made to AWS first, then completed by AWS Direct Connect Partners
+Hosted Connections: 50Mbps, 500 Mbps, to 10 Gbps
+- Connection requests are made via AWS Direct Connect Partners
+- Capacity can be added or removed on demand
+- 1,2, 5, 10 Gops available at select AWS Direct Connect Partners
+- Lead times are often longer than | month to establish a new connection
+
+Site to Site VPN as a Backup
+--
+- In case Direct Connect fails, you can set up a backup Direct Connect
+connection (expensive), or a Site-to-Site VPN connection.
+![image](https://github.com/user-attachments/assets/c766b696-258d-4c29-a54d-aa22f61e620c)
