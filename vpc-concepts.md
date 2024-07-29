@@ -1,4 +1,7 @@
 # AWS VPC
+
+![image](https://github.com/user-attachments/assets/e586e573-eb07-4ff8-9419-ca033889f123)
+
 - VPC = Virtual Private Cloud
 - You can have multiple VPCs in an AWS region (max. 5 per region - soft limit)
 - Max. CIDR per VPC is 5, for each CIDR:
