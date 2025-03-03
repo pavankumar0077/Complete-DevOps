@@ -49,37 +49,21 @@ where we have taints and tolerations configured.
 Remember taints and tolerations are only meant
 to restrict nodes from accepting certain pods.
 In this case, node one can only accept pod D,
-
 but it does not guarantee
-
 that pod D will always be placed on node one.
-
 Since there are no taints or restrictions applied
-
 on the other two nodes, pod D may very well be placed
-
 on any of the other two nodes.
-
 So remember, taints and tolerations
-
 does not tell the pod to go to a particular node.
-
 Instead, it tells the node
-
 to only accept pods with certain tolerations.
-
-
-
 
 
 ![image](https://github.com/user-attachments/assets/98e514cf-a200-4de2-9048-128c21facb4c)
 
 schedule any pods on the master node.
-
 Why is that?
-
 When the Kubernetes cluster is first set up,
-
 a taint is set on the master node automatically
-
 that prevents any pods from being scheduled on this node.
