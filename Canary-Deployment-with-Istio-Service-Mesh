@@ -1,0 +1,455 @@
+# Canary Deployment with Istio Service Mesh
+
+A proof-of-concept implementation of canary deployments using Istio service mesh on Kubernetes to reduce the impact of potential issues in production applications.
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
+- [Project Structure](#project-structure)
+- [Quick Start](#quick-start)
+- [Configuration](#configuration)
+- [Testing](#testing)
+- [Monitoring](#monitoring)
+- [Troubleshooting](#troubleshooting)
+- [Best Practices](#best-practices)
+- [Contributing](#contributing)
+
+## 🎯 Overview
+
+This project demonstrates how to implement canary deployments using Istio service mesh to:
+- Gradually roll out new application versions
+- Minimize risk by routing only a percentage of traffic to new versions
+- Enable quick rollbacks if issues are detected
+- Maintain high availability during deployments
+
+### Key Features
+
+- **Traffic Splitting**: 80% stable / 20% canary traffic distribution
+- **Zero Downtime**: Seamless deployment without service interruption
+- **Security First**: Custom Istio configuration following security best practices
+- **Observability**: Built-in metrics and monitoring capabilities
+- **Easy Rollback**: Quick reversion to stable version if needed
+
+## 🏗️ Architecture
+
+```
+┌─────────────────┐    ┌─────────────────┐
+│   Internet      │    │  Istio Gateway  │
+│   Traffic       │───▶│   (Port 8080)   │
+└─────────────────┘    └─────────────────┘
+                                │
+                       ┌─────────────────┐
+                       │ VirtualService  │
+                       │   Traffic       │
+                       │   Splitting     │
+                       └─────────────────┘
+                          │            │
+                    80%   │            │   20%
+                          ▼            ▼
+                  ┌──────────────┐ ┌──────────────┐
+                  │ api-stable   │ │ api-canary   │
+                  │ Service      │ │ Service      │
+                  │ (v1)         │ │ (v2)         │
+                  └──────────────┘ └──────────────┘
+                          │            │
+                          ▼            ▼
+                  ┌──────────────┐ ┌──────────────┐
+                  │ Stable Pods  │ │ Canary Pods  │
+                  │ (2 replicas) │ │ (3 replicas) │
+                  └──────────────┘ └──────────────┘
+```
+
+## ✅ Prerequisites
+
+- Kubernetes cluster (v1.20+)
+- kubectl configured and working
+- Sufficient cluster resources (minimum 4 CPU cores, 8GB RAM)
+- Administrator access to install Istio
+- Internet access for downloading Istio
+
+### Verified Environments
+- ✅ Google Kubernetes Engine (GKE)
+- ✅ Amazon Elastic Kubernetes Service (EKS)
+- ✅ Azure Kubernetes Service (AKS)
+- ✅ Local clusters (minikube, kind, k3s)
+
+## 📁 Project Structure
+
+```
+canary-deployments/
+├── README.md
+├── k8s/
+│   ├── app-stable-deployment.yaml    # Stable version deployment
+│   ├── app-stable-service.yaml       # Stable version service
+│   ├── app-canary-deployment.yaml    # Canary version deployment
+│   └── app-canary-service.yaml       # Canary version service
+├── istio/
+│   ├── istio-security-config.yaml    # Security team configuration
+│   ├── gateway.yaml                  # Istio Gateway configuration
+│   └── virtualservice.yaml           # Traffic routing rules
+└── scripts/
+    ├── deploy.sh                     # Automated deployment script
+    ├── test-traffic.sh               # Traffic testing script
+    └── cleanup.sh                    # Environment cleanup script
+```
+
+## 🚀 Quick Start
+
+### 1. Clone and Setup
+
+```bash
+# Create project directory
+mkdir ~/canary-deployments && cd ~/canary-deployments
+
+# Create subdirectories
+mkdir -p k8s istio scripts
+```
+
+### 2. Deploy Stable Application
+
+```bash
+# Deploy stable version (v1)
+kubectl apply -f k8s/app-stable-deployment.yaml
+kubectl apply -f k8s/app-stable-service.yaml
+
+# Verify deployment
+kubectl get pods -l app=api,lifecycle=stable
+```
+
+### 3. Install Istio
+
+```bash
+# Download Istio 1.17.0
+curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.17.0 TARGET_ARCH=x86_64 sh -
+
+# Install istioctl
+sudo mv istio-1.17.0/bin/istioctl /usr/local/bin
+
+# Install Istio with security configuration
+istioctl install -f istio/istio-security-config.yaml -y
+
+# Enable sidecar injection
+kubectl label namespace default istio-injection=enabled
+```
+
+### 4. Deploy Canary Application
+
+```bash
+# Deploy canary version (v2)
+kubectl apply -f k8s/app-canary-deployment.yaml
+kubectl apply -f k8s/app-canary-service.yaml
+
+# Restart deployments to inject sidecars
+kubectl rollout restart deployment/api-stable
+kubectl rollout restart deployment/api-canary
+```
+
+### 5. Configure Traffic Routing
+
+```bash
+# Create Istio Gateway
+kubectl apply -f istio/gateway.yaml
+
+# Configure traffic splitting (80/20)
+kubectl apply -f istio/virtualservice.yaml
+```
+
+### 6. Test the Setup
+
+```bash
+# Get ingress gateway external IP
+kubectl get svc istio-ingressgateway -n istio-system
+
+# Test traffic distribution
+for i in {1..20}; do
+  curl -s <EXTERNAL-IP>:8080
+  echo ""
+done
+```
+
+## ⚙️ Configuration
+
+### Application Versions
+
+| Version | Response | Traffic % | Replicas |
+|---------|----------|-----------|----------|
+| Stable (v1) | `{'runs_on':'kubernetes','lifecycle':'stable','api_version':'v1'}` | 80% | 2 |
+| Canary (v2) | `{'runs_on':'kubernetes','lifecycle':'canary','api_version':'v2'}` | 20% | 3 |
+
+### Traffic Routing Configuration
+
+The VirtualService can be adjusted for different traffic splits:
+
+```yaml
+# Conservative approach (5% canary)
+- destination:
+    host: api-stable
+  weight: 95
+- destination:
+    host: api-canary
+  weight: 5
+
+# Aggressive approach (30% canary)
+- destination:
+    host: api-stable
+  weight: 70
+- destination:
+    host: api-canary
+  weight: 30
+```
+
+### Security Configuration
+
+The Istio installation includes:
+- Custom security policies
+- Resource limits and requests
+- Network policies
+- TLS configuration
+- Access controls
+
+## 🧪 Testing
+
+### Manual Testing
+
+```bash
+# Test stable version directly
+kubectl port-forward service/api-stable 8081:80
+curl localhost:8081
+
+# Test canary version directly
+kubectl port-forward service/api-canary 8082:80
+curl localhost:8082
+
+# Test through Istio Gateway
+kubectl port-forward -n istio-system svc/istio-ingressgateway 8080:8080
+curl localhost:8080
+```
+
+### Automated Testing
+
+```bash
+# Run traffic distribution test
+./scripts/test-traffic.sh
+
+# Expected output shows ~80% stable, ~20% canary responses
+```
+
+### Load Testing
+
+```bash
+# Install hey load testing tool
+go install github.com/rakyll/hey@latest
+
+# Run load test
+hey -n 1000 -c 10 http://<EXTERNAL-IP>:8080
+```
+
+## 📊 Monitoring
+
+### Built-in Istio Observability
+
+```bash
+# Access Istio dashboard (if installed)
+istioctl dashboard kiali
+
+# View Grafana dashboards
+istioctl dashboard grafana
+
+# Access Jaeger tracing
+istioctl dashboard jaeger
+```
+
+### Metrics and Monitoring
+
+Key metrics to monitor:
+- **Request Success Rate**: Should remain above 99.5%
+- **Response Time**: Monitor P95 and P99 latencies
+- **Error Rate**: Should not increase during canary deployment
+- **Traffic Distribution**: Verify actual vs. configured percentages
+
+### Custom Monitoring
+
+```bash
+# Check pod resource usage
+kubectl top pods -l app=api
+
+# View application logs
+kubectl logs -l app=api,lifecycle=canary -f
+
+# Monitor Istio proxy metrics
+kubectl exec deployment/api-canary -c istio-proxy -- curl localhost:15000/stats
+```
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+#### 1. Pods Not Starting
+```bash
+# Check pod status and events
+kubectl describe pod <pod-name>
+kubectl get events --sort-by=.metadata.creationTimestamp
+```
+
+#### 2. Sidecar Injection Not Working
+```bash
+# Verify namespace labeling
+kubectl get namespace default --show-labels
+
+# Check sidecar injector
+kubectl get mutatingwebhookconfigurations
+```
+
+#### 3. Traffic Not Routing Correctly
+```bash
+# Verify VirtualService configuration
+kubectl describe virtualservice api
+
+# Check Gateway status
+kubectl describe gateway api
+
+# Validate Istio proxy configuration
+istioctl proxy-config routes deployment/api-stable
+```
+
+#### 4. External IP Pending
+```bash
+# Check LoadBalancer service
+kubectl describe svc istio-ingressgateway -n istio-system
+
+# Use NodePort if LoadBalancer unavailable
+kubectl patch svc istio-ingressgateway -n istio-system -p '{"spec":{"type":"NodePort"}}'
+```
+
+### Debug Commands
+
+```bash
+# Check Istio configuration
+istioctl analyze
+
+# Verify proxy configuration
+istioctl proxy-status
+
+# View Envoy configuration
+istioctl proxy-config cluster deployment/api-stable
+
+# Check mTLS status
+istioctl authn tls-check api-stable.default.svc.cluster.local
+```
+
+### Logs and Diagnostics
+
+```bash
+# Application logs
+kubectl logs -l app=api --all-containers=true
+
+# Istio proxy logs
+kubectl logs -l app=api -c istio-proxy
+
+# Istio control plane logs
+kubectl logs -n istio-system -l app=istiod
+```
+
+## 📖 Best Practices
+
+### Deployment Strategy
+
+1. **Start Small**: Begin with 1-5% canary traffic
+2. **Monitor Closely**: Watch metrics for at least 30 minutes
+3. **Gradual Increase**: Increment by 10-20% if metrics look good
+4. **Quick Rollback**: Be prepared to route 100% traffic to stable
+
+### Traffic Management
+
+- Use **weighted routing** for percentage-based splits
+- Implement **header-based routing** for specific user groups
+- Configure **timeout and retry policies** for resilience
+- Set up **circuit breakers** to prevent cascade failures
+
+### Security
+
+- Always use **custom Istio configurations** provided by security team
+- Enable **mutual TLS (mTLS)** between services
+- Implement **proper RBAC policies**
+- Regularly **update Istio** to latest stable version
+
+### Monitoring and Alerting
+
+- Set up **alerts for error rate increases**
+- Monitor **resource utilization** during deployments
+- Track **business metrics** alongside technical metrics
+- Use **distributed tracing** to debug issues
+
+## 🔄 Rollback Procedures
+
+### Immediate Rollback (Emergency)
+
+```bash
+# Route 100% traffic to stable version
+kubectl patch virtualservice api --type='merge' -p='{"spec":{"http":[{"route":[{"destination":{"host":"api-stable"},"weight":100}]}]}}'
+```
+
+### Gradual Rollback
+
+```bash
+# Reduce canary traffic to 10%
+kubectl patch virtualservice api --type='merge' -p='{"spec":{"http":[{"route":[{"destination":{"host":"api-stable"},"weight":90},{"destination":{"host":"api-canary"},"weight":10}]}]}}'
+
+# Then to 0%
+kubectl patch virtualservice api --type='merge' -p='{"spec":{"http":[{"route":[{"destination":{"host":"api-stable"},"weight":100}]}]}}'
+```
+
+## 🧹 Cleanup
+
+```bash
+# Remove application deployments
+kubectl delete -f k8s/
+
+# Remove Istio configurations
+kubectl delete -f istio/gateway.yaml
+kubectl delete -f istio/virtualservice.yaml
+
+# Uninstall Istio (optional)
+istioctl uninstall --purge
+kubectl delete namespace istio-system
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Development Guidelines
+
+- Follow Kubernetes resource naming conventions
+- Include proper labels and annotations
+- Add comprehensive documentation
+- Test configurations in multiple environments
+- Follow security best practices
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📞 Support
+
+- **Internal Team**: Contact DevOps team for cluster-specific issues
+- **Istio Documentation**: https://istio.io/latest/docs/
+- **Kubernetes Documentation**: https://kubernetes.io/docs/
+- **Security Team**: For questions about security configurations
+
+## 🏷️ Version History
+
+- **v1.0.0** - Initial implementation with Istio 1.17.0
+- **v1.1.0** - Added monitoring and alerting configurations
+- **v1.2.0** - Enhanced security configurations
+- **v2.0.0** - Migration to Istio 1.18.0 (planned)
+
+---
+
+**Note**: This is a proof-of-concept implementation. For production deployments, ensure proper testing, monitoring, and security reviews are completed before implementation.
