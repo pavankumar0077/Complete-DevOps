@@ -35,6 +35,10 @@ Kubernetes runs on VMs or bare metal infrastructure, managing containers across 
 
 - **API Server**: The entry point for all requests, handling authentication, authorization, and admission (AAA).
 - **etcd**: A distributed key-value store (database) for cluster state, using Raft for leader election (e.g., 3 nodes, 2n+1 rule).
+
+```
+  https://medium.com/@extio/deep-dive-into-etcd-a-distributed-key-value-store-a6a7699d3abc
+```
 - **Scheduler**: Assigns pods to nodes based on resources, taints, tolerations, affinity, and node selectors.
 - **Controller Manager (CCM)**: Ensures the desired state matches the actual state (e.g., 3 replicas running).
 - **Cloud Controller Manager**: Manages cloud-specific resources (e.g., load balancer IPs).
