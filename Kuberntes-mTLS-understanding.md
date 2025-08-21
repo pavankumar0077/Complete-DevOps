@@ -91,17 +91,4 @@ sequenceDiagram
     EnvoyB->>AppB: Decrypted plain traffic
 ```
 
-```mermaid
-flowchart TD
-    A[Pod Created] --> B[Envoy Sidecar Injected]
-    B --> C[App Container Started]
-    C --> D[Envoy Sidecar Started]
-    D --> E[Both Containers Running]
-
-    E -->|If Pod Dies| F[Pod Terminated (App + Envoy Down)]
-    F --> A          %% <-- this missing edge added
-
-    E -->|If Pod Restarts| A
-    E -->|If Envoy Crashes| G[Envoy Container Restarted by kubelet]
-    G --> E
-```
+![alt text](image-5.png)
